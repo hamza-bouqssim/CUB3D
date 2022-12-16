@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   valid_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/16 18:23:12 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/16 18:22:32 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/16 18:22:58 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <mlx.h>
-# include <fcntl.h>
-# define HEIGHT 600
-# define WIDTH 600
-//___________ Lists
-typedef struct s_data
+#include "../cub3d.h"
+
+int	valide_path(char *path)
 {
-    void *mlx;
-    void *win;
-}   t_data;
-//________________________
-//___________ f_prototypes
-int ft_strlen(char *str);
-int	valide_path(char *path);
-//________________________
-#endif
+	int		len;
+	int		index;
+	int		i;
+	char	*ext;
+
+	i = 0;
+	ext = ".cub";
+	len = ft_strlen(path);
+	index = len - 4;
+	if (index <= 0)
+		return (0);
+	while (path[index + i])
+	{
+		if (path[index + i] != ext[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}

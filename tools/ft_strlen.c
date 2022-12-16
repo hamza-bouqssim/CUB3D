@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/16 18:23:12 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/16 18:21:02 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/16 18:21:30 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <mlx.h>
-# include <fcntl.h>
-# define HEIGHT 600
-# define WIDTH 600
-//___________ Lists
-typedef struct s_data
+#include "../cub3d.h"
+
+int	ft_strlen(char *str)
 {
-    void *mlx;
-    void *win;
-}   t_data;
-//________________________
-//___________ f_prototypes
-int ft_strlen(char *str);
-int	valide_path(char *path);
-//________________________
-#endif
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
