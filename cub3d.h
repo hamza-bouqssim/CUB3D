@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/18 20:10:04 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/18 22:48:00 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct s_data
 {
     void *mlx;
     void *win;
+    int x;
+    int y;
+    int i;
+    int j;
 }   t_data;
 //________________________
 //___________ f_prototypes
