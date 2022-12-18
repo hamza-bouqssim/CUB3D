@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/18 21:01:02 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/18 21:15:10 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av)
 			{
 				if (splitted_array[i][j] == '1')
 					printf("1: Finded\n");
-				else if (splitted_array[i][j])
+				else if (splitted_array[i][j] == '0')
 					printf("0: finded\n");
 				j++;
 			}
@@ -46,7 +46,9 @@ int main(int ac, char **av)
 		}
 		// t_data data;
 		// data.mlx = mlx_init();
-		// data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D")
+		// data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
+		// int x,y;
+		// while(x < x + 30)
 		// mlx_loop(data.mlx);
 	}
 	else
