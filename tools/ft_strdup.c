@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 18:21:02 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/18 20:10:40 by hbouqssi         ###   ########.fr       */
+/*   Created: 2022/12/17 19:57:52 by hbouqssi          #+#    #+#             */
+/*   Updated: 2022/12/17 20:00:20 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	ft_strlen(char *str)
+char	*ft_strdup( char *s1)
 {
-	int	i;
+	size_t	len;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	while (str[i])
+	len = ft_strlen(s1);
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		str[i] = s1[i];
 		i++;
-	return (i);
+	}
+	str[len] = '\0';
+	return (str);
 }
-
-int ft_countRows(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
