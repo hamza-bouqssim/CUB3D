@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   elements_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 18:21:02 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/19 16:02:25 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/19 20:56:38 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-size_t	ft_strlen(char *str)
+int	check_elements(t_data *data)
 {
-	size_t	i;
+	int		i;
+	char	**spl;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (data->elements[i])
+	{
+		spl = ft_split(data->elements[i], ' ');
+		printf("%s", spl[0]);
+		printf("%s\n", spl[1]);
+		free (spl[0]);
+		free (spl[1]);
+		free (spl);
 		i++;
-	return (i);
+	}
+	return (1);
 }

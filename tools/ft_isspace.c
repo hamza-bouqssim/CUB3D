@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 18:21:02 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/19 16:02:25 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/19 17:45:41 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/19 18:00:53 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-size_t	ft_strlen(char *str)
+int	ft_isspace(int c)
 {
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+	if (c == 9 || c == 10 || c == 11 || c == 12 || c == 13
+		|| c == 32)
+		return (1);
+	return (0);
 }

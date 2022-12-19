@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/16 18:23:12 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:10:23 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,29 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
+# include "gnl/get_next_line.h"
 # define HEIGHT 600
 # define WIDTH 600
-//___________ Lists
+
 typedef struct s_data
 {
-    void *mlx;
-    void *win;
-}   t_data;
-//________________________
-//___________ f_prototypes
-int ft_strlen(char *str);
-int	valide_path(char *path);
-//________________________
+	void	*mlx;
+	void	*win;
+	char	*line;
+	char	**spl;
+	char	**elements;
+	char	**map;
+}	t_data;
+
+size_t	ft_strlen(char *str);
+int		valide_path(char *path);
+void	fill_spl(t_data *data, int fd);
+char	**ft_split(char const *s, char c);
+char	*ft_strdup(char *s1);
+int		ft_isspace(int c);
+int		check_elements(t_data *data);
+
 #endif

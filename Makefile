@@ -6,15 +6,22 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/16 18:24:03 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/19 20:49:07 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3D
+NAME = cub3D
 GCC = gcc -Wall -Wextra -Werror -Ofast
 SRC = main.c \
 	tools/ft_strlen.c \
-	parsing/valid_path.c
+	tools/ft_split.c \
+	tools/ft_strdup.c \
+	parsing/valid_path.c \
+	parsing/fill_spl.c \
+	parsing/elements_check.c \
+	gnl/get_next_line.c \
+	gnl/get_next_line_utils.c \
+
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
