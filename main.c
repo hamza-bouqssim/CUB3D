@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/18 23:42:29 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/19 23:17:42 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void draw_map(t_data *data, char **arr)
 
 int main(int ac, char **av)
 {
+	t_data data;
+	t_player player;
 	int	fd;
 	char *ret;
 	char **splitted_array;
@@ -74,10 +76,24 @@ int main(int ac, char **av)
 		Columns = ft_strlen(splitted_array[0]);
 		Rows = ft_countRows(splitted_array);
 		i = 0;
-		t_data data;
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, Columns * 30, Rows * 30, "CUB3D");
 		draw_map(&data, splitted_array);
+		player.a = (Columns * 30) / 2;
+		player.b = (Rows * 30) / 2;
+		printf("a = %d\n, b = %d", player.a, player.b);
+		player.x = 0;
+		while(player.x < Columns * 30)
+		{
+			player.y = 0;
+			while(player.y < Rows * 30)
+			{
+				if (((player.x - player.a) * (player.x - player.a)) + ((player.y - player.b) * (player.y - player.b)) <= 90 * 90)
+					mlx_pixel_put(data.mlx, data.win, Columns * 30, Rows * 30, 0xff0000);
+				player.y++;
+			}
+			player.x++;
+		}
 		mlx_loop(data.mlx);
 	}
 	else
