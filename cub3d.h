@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/18 22:48:00 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:51:33 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef struct s_data
     int i;
     int j;
 }   t_data;
+typedef struct s_player
+{
+    int x;
+    int y;
+    int a;
+    int b;
+}   t_player;
 //________________________
 //___________ f_prototypes
 char	*get_next_line(int fd);
