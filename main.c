@@ -6,12 +6,12 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/20 21:01:35 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/20 22:33:13 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+#include <math.h>
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -93,7 +93,7 @@ void draw_map(t_data *data)
 			else if (data->splitted_array[i][j] == '0' || data->splitted_array[i][j] == 'E')
 			{
 				draw(data, 0xfffffff, 30, y, x);
-				draw(data, 0xff0000, 30, data->player_x, data->player_y);
+				draw(data, 0xff0000, 1, data->player_x *30 + 15, data->player_y * 30 + 15);
 			}
 			j++;
 			y++;
@@ -107,13 +107,14 @@ int ft_moves(int key, t_data *data)
 {
 	if (key == W)
 	{
-		// if (data->splitted_array[data->player_y - 0.1][data->player_x] != '1')
+		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x)] != '1')
 			data->player_y -= 0.1;
-		printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
+		printf("player_x -- %d,  player_y -- %d\n", (int)round(data->player_x), (int)round(data->player_y));
 	}
 	if(key == S)
 	{
 		data->player_y += 0.1;
+			printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
 	}
 	if(key == D)
 		data->player_x += 0.1;
@@ -146,7 +147,9 @@ int main(int ac, char **av)
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 		data.player_x = 1;
-		data.player_y = 1;
+		data.player_y = 2;
+		data.playerX = 1;
+		data.playerY = 1;
 		draw_map(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_moves, &data);
