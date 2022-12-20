@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/20 13:53:47 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:31:09 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,30 @@ int close_win(void *param)
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
+
+void draw_player(t_data *data, t_player *player, int h, int w)
+{
+	player->a = h / 2;
+	player->b = w / 2;
+	int v1 = player->a / 18;
+	int v2 = player->b / 18;
+	int radius = v1 * v2;
+	player->x = 0;
+	while(player->x < h * 30)
+	{
+		player->y = 0;
+		while(player->y < w * 30)
+		{
+			if (((player->x - player->a) * (player->x - player->a)) + ((player->y - player->b) * (player->y - player->b)) <=  radius)
+				mlx_pixel_put(data->mlx, data->win, player->x, player->y, 0xff0000);
+			player->y++;
+		}
+		player->x++;
+	}
+}
+
 void draw(t_data *data, int color, int scale, int x, int y)
 {
-	// data->x = 0;
 	int holdx = x;
 	int holdy = y;
 	while(x < holdx + scale)
@@ -58,7 +79,6 @@ void draw_map(t_data *data, char **arr)
 		}
 		i++;
 		x += 30;
-			// printf("%d\n", x);
 	}
 }
 
@@ -69,7 +89,9 @@ int main(int ac, char **av)
 	int	fd;
 	char *ret;
 	char **splitted_array;
-	int i, j, Rows, Columns;
+	int Columns;
+	int Rows;
+	
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
@@ -82,28 +104,10 @@ int main(int ac, char **av)
 		splitted_array = ft_split(ret, '\n');
 		Columns = ft_strlen(splitted_array[0]);
 		Rows = ft_countRows(splitted_array);
-		i = 0;
-		// printf("a = %d\n, b = %d", player.a, player.b);
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, Columns * 30, Rows * 30, "CUB3D");
 		draw_map(&data, splitted_array);
-		player.a = (Columns * 30) / 2;
-		player.b = (Rows * 30) / 2;
-		int v1 = player.a / 18;
-		int v2 = player.b / 18;
-		int radius = v1 * v2;
-		player.x = 0;
-		while(player.x < Columns * 30)
-		{
-			player.y = 0;
-			while(player.y < Rows * 30)
-			{
-				if (((player.x - player.a) * (player.x - player.a)) + ((player.y - player.b) * (player.y - player.b)) <=  radius)
-					mlx_pixel_put(data.mlx, data.win, player.x, player.y, 0xff0000);
-				player.y++;
-			}
-			player.x++;
-		}
+		draw_player(&data, &player, Columns * 30, Rows * 30);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_loop(data.mlx);
 	}
