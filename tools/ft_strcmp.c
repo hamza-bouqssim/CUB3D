@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_path.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 18:22:32 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/20 15:18:40 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 15:02:12 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 15:03:49 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	valide_path(char *path, char *str)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		len;
-	int		index;
-	int		i;
-	char	*ext;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	ext = str;
-	len = ft_strlen(path);
-	index = len - 4;
-	if (index <= 0)
-		return (0);
-	while (path[index + i])
-	{
-		if (path[index + i] != ext[i])
-			return (0);
+	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
-	}
-	return (1);
+	return (str1[i] - str2[i]);
 }

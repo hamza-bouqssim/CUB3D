@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:10:23 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/20 21:49:37 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,15 @@ typedef struct s_data
 }	t_data;
 
 size_t	ft_strlen(char *str);
-int		valide_path(char *path);
+int		valide_path(char *path, char *str);
 void	fill_spl(t_data *data, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(char *s1);
 int		ft_isspace(int c);
 int		check_elements(t_data *data);
+int		ft_strcmp(const char *s1, const char *s2);
+void    ft_free(char **spl);
+int		ft_atoi(const char *str);
+int		is_digit(char *str);
 
 #endif

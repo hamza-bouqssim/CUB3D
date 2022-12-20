@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/19 20:49:07 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/20 21:49:47 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@ SRC = main.c \
 	tools/ft_strlen.c \
 	tools/ft_split.c \
 	tools/ft_strdup.c \
+	tools/ft_strcmp.c \
+	tools/ft_free.c \
+	tools/ft_atoi.c \
+	tools/is_digit.c \
 	parsing/valid_path.c \
 	parsing/fill_spl.c \
 	parsing/elements_check.c \

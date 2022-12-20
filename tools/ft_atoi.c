@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_path.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 18:22:32 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/20 15:18:40 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 21:39:35 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 21:39:50 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	valide_path(char *path, char *str)
+int	ft_atoi(const char *str)
 {
-	int		len;
-	int		index;
-	int		i;
-	char	*ext;
+	int	i;
+	int	n;
+	int	sign;
 
 	i = 0;
-	ext = str;
-	len = ft_strlen(path);
-	index = len - 4;
-	if (index <= 0)
-		return (0);
-	while (path[index + i])
+	n = 0;
+	sign = 1;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (path[index + i] != ext[i])
-			return (0);
+		if (str[i] == '-')
+			sign = -sign;
 		i++;
 	}
-	return (1);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		n = n * 10 + (str[i] - '0');
+		i++;
+	}
+	return (n * sign);
 }

@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/19 20:53:40 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:31:37 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
-		if (fd < 0 || valide_path(av[1]) == 0)
+		if (fd < 0 || valide_path(av[1], ".cub") == 0)
 		{
 			printf("Wrong path\n");
 			return (1);
 		}
 		fill_spl(&data, fd);
 		// printf("%s", data.elements[0]);
-		check_elements(&data);
+		if (!check_elements(&data))
+			return (0);
 		// while (data.spl[i])
 		// 	printf("%s\n", data.spl[i++]);
 		// data.mlx = mlx_init();
