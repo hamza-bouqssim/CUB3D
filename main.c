@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:43:31 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:20:41 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -107,19 +106,26 @@ int ft_moves(int key, t_data *data)
 {
 	if (key == W)
 	{
-		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x)] != '1')
+		if (data->splitted_array[(int)round(data->player_y - 0.1)][(int)round(data->player_x)] != '1')
 			data->player_y -= 0.1;
 		printf("player_x -- %d,  player_y -- %d\n", (int)round(data->player_x), (int)round(data->player_y));
 	}
 	if(key == S)
 	{
-		data->player_y += 0.1;
+		if (data->splitted_array[(int)round(data->player_y + 0.1)][(int)round(data->player_x)] != '1')
+			data->player_y += 0.1;
 			printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
 	}
 	if(key == D)
+	{
+		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x + 0.1)] != '1')
 		data->player_x += 0.1;
+	}
 	if(key == A)
+	{
+		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x - 0.1)] != '1')
 		data->player_x -= 0.1;
+	}
 	mlx_destroy_image(data->mlx, data->img.img);
 	draw_map(data);
 	return (0);
@@ -146,9 +152,6 @@ int	main(int ac, char **av)
 			write(2, "Error\nNot valid", 15);
 			return (0);
 		}
-		// data.mlx = mlx_init();
-		// data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
-		// mlx_loop(data.mlx);
 		ret = get_next_line(fd);
 		data.splitted_array = ft_split(ret, '\n');
 		data.Columns = ft_strlen(data.splitted_array[0]);
@@ -156,7 +159,7 @@ int	main(int ac, char **av)
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 		data.player_x = 1;
-		data.player_y = 2;
+		data.player_y = 6;
 		data.playerX = 1;
 		data.playerY = 1;
 		draw_map(&data);
