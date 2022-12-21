@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/21 17:35:21 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/21 20:49:36 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,18 @@ SRC = main.c \
 	parsing/fill_spl.c \
 	parsing/elements_check.c \
 	parsing/map_check.c \
-	gnl/get_next_line.c \
-	gnl/get_next_line_utils.c \
+	tools/get_next_line.c \
+	tools/get_next_line_utils.c \
 
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-	$(GCC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(GCC) $(OBJ) -g -lmlx -framework OpenGL -framework AppKit -o  $(NAME)
 
-%.o: %.c cub3d.h
-	$(GCC) -c $< -o $@
+%.o: %.c cub3d.h ../get_next_line.h
+	$(GCC) -c $< -o $@ -g
 
 bonus: all
 
