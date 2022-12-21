@@ -6,11 +6,37 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/20 22:16:23 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:29:27 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static int	check_double(char **spl, char **str)
+{
+	static int	i;
+	int			j;
+
+	str[i] = ft_strdup(spl[0]);
+	i++;
+	if (i == 6)
+	{
+		str[i] = NULL;
+		i = 0;
+		while (str[i])
+		{
+			j = i + 1;
+			while (str[j])
+			{
+				if (!ft_strcmp(str[i], str[j]))
+					return (0);
+				j++;
+			}
+			i++;
+		}
+	}
+	return (1);
+}
 
 static int	rgb_check(char **str)
 {
@@ -25,10 +51,7 @@ static int	rgb_check(char **str)
 		while (rgb[i])
 			i++;
 		if (i != 3)
-		{
-			write(2, "Error\nNot valid", 15);
 			return (0);
-		}
 		i = 0;
 		while (rgb[i])
 		{
@@ -64,24 +87,24 @@ int	check_elements(t_data *data)
 {
 	int		i;
 	char	**spl;
+	char	**str;
 
 	i = 0;
-	if (!data->elements)
-	{
-		write(2, "Error\nNot valid", 15);
+	str = malloc(sizeof(char *) * 7);
+	if (!data->elements || !str)
 		return (0);
-	}
 	while (data->elements[i])
 	{
 		spl = ft_split(data->elements[i], ' ');
-		if (!checker(spl))
+		if (!checker(spl) || !check_double(spl, str))
 		{
 			ft_free (spl);
-			write(2, "Error\nNot valid", 15);
+			ft_free (str);
 			return (0);
 		}
 		ft_free(spl);
 		i++;
 	}
+	ft_free (str);
 	return (1);
 }

@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/20 21:49:47 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/21 17:35:21 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = main.c \
 	parsing/valid_path.c \
 	parsing/fill_spl.c \
 	parsing/elements_check.c \
+	parsing/map_check.c \
 	gnl/get_next_line.c \
 	gnl/get_next_line_utils.c \
 
