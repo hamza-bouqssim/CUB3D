@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:12:39 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/21 18:52:40 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:55:37 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_spl(t_data *data, int fd)
 	data->spl = ft_split(data->line, '\n');
 	if (data->spl)
 	{
-		while(data->spl[i])
+		while (data->spl[i])
 			i++;
 		data->elements = malloc(sizeof(char *) * 7);
 		data->map = malloc(sizeof(char *) * (i - 5));

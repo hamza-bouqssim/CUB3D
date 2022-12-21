@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/21 18:45:38 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:58:32 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	rgb_check(char **str)
 				return (0);
 			i++;
 		}
+		ft_free(rgb);
 	}
 	return (1);
 }
