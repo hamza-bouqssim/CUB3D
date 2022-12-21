@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/21 18:36:33 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:52:47 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	map_check(t_data *data)
 	int	j;
 
 	i = 0;
-	if (!wall_check(data))
+	if (!data->map[0] || !wall_check(data))
 		return (0);
 	while (data->map[i])
 	{
