@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/20 20:51:44 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:49:49 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
+
 # define BUFFER_SIZE 1
 # define HEIGHT 1000
 # define WIDTH 1000
@@ -67,17 +69,29 @@ typedef struct s_data
     double player_y;
     char **splitted_array;
     t_image img;
+	char	*line;
+	char	**spl;
+	char	**elements;
+	char	**map;
 }   t_data;
 
 //________________________
 //___________ f_prototypes
 char	*get_next_line(int fd);
 int     ft_strlen(char *str);
-int	    valide_path(char *path);
+int		valide_path(char *path, char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup( char *s1);
 char	**ft_split(char const *s, char c);
-int ft_countRows(char **str);
+int 	ft_countRows(char **str);
+void	fill_spl(t_data *data, int fd);
+int		ft_isspace(int c);
+int		ft_strcmp(const char *s1, const char *s2);
+void    ft_free(char **spl);
+int		ft_atoi(const char *str);
+int		is_digit(char *str);
+int		check_elements(t_data *data);
+int		map_check(t_data *data);
 //________________________
 #endif

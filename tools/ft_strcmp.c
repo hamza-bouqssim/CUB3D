@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 19:57:52 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:44:10 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 15:02:12 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 15:03:49 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_strdup(char *s1)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	len;
-	size_t	i;
-	char	*str;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	len = ft_strlen(s1);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s1[i];
+	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
-	}
-	str[len] = '\0';
-	return (str);
+	return (str1[i] - str2[i]);
 }

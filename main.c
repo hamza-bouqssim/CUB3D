@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/20 22:33:13 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:43:31 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int ft_moves(int key, t_data *data)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data data;
 	int	fd;
@@ -135,11 +135,20 @@ int main(int ac, char **av)
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
-		if (fd < 0 || valide_path(av[1]) == 0)
+		if (fd < 0 || valide_path(av[1], ".cub") == 0)
 		{
-			printf("Wrong path\n");
+			write(2, "Wrong path\n", 11);
 			return (1);
 		}
+		fill_spl(&data, fd);
+		if (!check_elements(&data) || !map_check(&data))
+		{
+			write(2, "Error\nNot valid", 15);
+			return (0);
+		}
+		// data.mlx = mlx_init();
+		// data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
+		// mlx_loop(data.mlx);
 		ret = get_next_line(fd);
 		data.splitted_array = ft_split(ret, '\n');
 		data.Columns = ft_strlen(data.splitted_array[0]);
@@ -156,6 +165,6 @@ int main(int ac, char **av)
 		mlx_loop(data.mlx);
 	}
 	else
-		printf("Check your arguments !\n");
+		write(2, "Check your arguments !\n", 23);
 	return 0;
 }

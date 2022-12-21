@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   is_digit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 19:57:52 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:44:10 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 21:47:03 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 21:48:52 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_strdup(char *s1)
+int	is_digit(char *str)
 {
-	size_t	len;
-	size_t	i;
-	char	*str;
+	int	i;
 
 	i = 0;
-	len = ft_strlen(s1);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
+	while (str[i])
 	{
-		str[i] = s1[i];
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
 		i++;
 	}
-	str[len] = '\0';
-	return (str);
+	return (1);
 }

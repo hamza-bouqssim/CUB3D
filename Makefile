@@ -3,21 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/20 19:52:40 by hbouqssi         ###   ########.fr        #
+#    Updated: 2022/12/21 20:49:36 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3D
-GCC = gcc -Wall -Wextra -Werror -Ofast -g
+NAME = cub3D
+GCC = gcc -Wall -Wextra -Werror -Ofast
 SRC = main.c \
 	tools/ft_strlen.c \
+	tools/ft_split.c \
+	tools/ft_strdup.c \
+	tools/ft_strcmp.c \
+	tools/ft_free.c \
+	tools/ft_atoi.c \
+	tools/is_digit.c \
 	parsing/valid_path.c \
+	parsing/fill_spl.c \
+	parsing/elements_check.c \
+	parsing/map_check.c \
 	tools/get_next_line.c \
 	tools/get_next_line_utils.c \
-	tools/ft_split.c
+
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)

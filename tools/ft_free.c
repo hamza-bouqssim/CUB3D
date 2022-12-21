@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 19:57:52 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:44:10 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 19:02:35 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 19:03:24 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_strdup(char *s1)
+void    ft_free(char **spl)
 {
-	size_t	len;
-	size_t	i;
-	char	*str;
+    int i;
 
-	i = 0;
-	len = ft_strlen(s1);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[len] = '\0';
-	return (str);
+    i = 0;
+    while (spl[i])
+        free (spl[i++]);
+    free (spl);
 }

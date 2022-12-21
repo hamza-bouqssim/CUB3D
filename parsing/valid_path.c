@@ -6,13 +6,13 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:22:32 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/16 18:22:58 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:18:40 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	valide_path(char *path)
+int	valide_path(char *path, char *str)
 {
 	int		len;
 	int		index;
@@ -20,7 +20,7 @@ int	valide_path(char *path)
 	char	*ext;
 
 	i = 0;
-	ext = ".cub";
+	ext = str;
 	len = ft_strlen(path);
 	index = len - 4;
 	if (index <= 0)

@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 19:57:52 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:44:10 by sismaili         ###   ########.fr       */
+/*   Created: 2022/12/20 21:39:35 by sismaili          #+#    #+#             */
+/*   Updated: 2022/12/20 21:39:50 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_strdup(char *s1)
+int	ft_atoi(const char *str)
 {
-	size_t	len;
-	size_t	i;
-	char	*str;
+	int	i;
+	int	n;
+	int	sign;
 
 	i = 0;
-	len = ft_strlen(s1);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
+	n = 0;
+	sign = 1;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		str[i] = s1[i];
+		if (str[i] == '-')
+			sign = -sign;
 		i++;
 	}
-	str[len] = '\0';
-	return (str);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		n = n * 10 + (str[i] - '0');
+		i++;
+	}
+	return (n * sign);
 }
