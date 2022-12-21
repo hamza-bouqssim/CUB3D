@@ -6,11 +6,12 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 21:20:41 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2022/12/21 22:04:53 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -81,18 +82,18 @@ void draw_map(t_data *data)
 	
 	i = 0;
 	image(data);
-	while (data->splitted_array[i])
+	while (data->map[i])
 	{
 		y = 0;
 		j = 0;
-		while (data->splitted_array[i][j])
+		while (data->map[i][j])
 		{
-			if (data->splitted_array[i][j] == '1')
+			if (data->map[i][j] == '1')
 				draw(data, 0x0000fff, 30, y, x);
-			else if (data->splitted_array[i][j] == '0' || data->splitted_array[i][j] == 'E')
+			else if (data->map[i][j] == '0' || data->map[i][j] == 'E')
 			{
 				draw(data, 0xfffffff, 30, y, x);
-				draw(data, 0xff0000, 1, data->player_x *30 + 15, data->player_y * 30 + 15);
+				draw(data, 0xff0000, 1, data->player_x * 30 + 15, data->player_y * 30 + 15);
 			}
 			j++;
 			y++;
@@ -106,24 +107,24 @@ int ft_moves(int key, t_data *data)
 {
 	if (key == W)
 	{
-		if (data->splitted_array[(int)round(data->player_y - 0.1)][(int)round(data->player_x)] != '1')
+		if (data->map[(int)round(data->player_y - 0.1)][(int)round(data->player_x)] != '1')
 			data->player_y -= 0.1;
 		printf("player_x -- %d,  player_y -- %d\n", (int)round(data->player_x), (int)round(data->player_y));
 	}
 	if(key == S)
 	{
-		if (data->splitted_array[(int)round(data->player_y + 0.1)][(int)round(data->player_x)] != '1')
+		if (data->map[(int)round(data->player_y + 0.1)][(int)round(data->player_x)] != '1')
 			data->player_y += 0.1;
 			printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
 	}
 	if(key == D)
 	{
-		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x + 0.1)] != '1')
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x + 0.1)] != '1')
 		data->player_x += 0.1;
 	}
 	if(key == A)
 	{
-		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x - 0.1)] != '1')
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x - 0.1)] != '1')
 		data->player_x -= 0.1;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
@@ -136,7 +137,7 @@ int	main(int ac, char **av)
 	t_data data;
 	int	fd;
 	char *ret;
-	char **splitted_array;
+	// char **map;
 	
 	if (ac == 2)
 	{
@@ -154,12 +155,12 @@ int	main(int ac, char **av)
 		}
 		ret = get_next_line(fd);
 		data.splitted_array = ft_split(ret, '\n');
-		data.Columns = ft_strlen(data.splitted_array[0]);
-		data.Rows = ft_countRows(data.splitted_array);
+		data.Columns = ft_strlen(data.map[0]);
+		data.Rows = ft_countRows(data.map);
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 		data.player_x = 1;
-		data.player_y = 6;
+		data.player_y = 2;
 		data.playerX = 1;
 		data.playerY = 1;
 		draw_map(&data);
