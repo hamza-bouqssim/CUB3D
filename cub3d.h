@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:49:49 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/22 23:32:27 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,14 @@ int		ft_atoi(const char *str);
 int		is_digit(char *str);
 int		check_elements(t_data *data);
 int		map_check(t_data *data);
+int     close_win(void *param);
+void	image(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    draw(t_data *data, int color, int scale, double x, double y);
+void    draw_player(t_data *data, int color, double x, double y);
+void    draw_map(t_data *data);
+int     ft_keys(int keycode, t_data *data);
+int     ft_moves(int key, t_data *data);
 //________________________
+
 #endif

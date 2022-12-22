@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
+#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/21 20:49:36 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/22 23:33:27 by hbouqssi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ SRC = main.c \
 	parsing/map_check.c \
 	tools/get_next_line.c \
 	tools/get_next_line_utils.c \
+	utils.c \
+	drawing_functions.c \
+	key_hooks.c
 
 OBJ = ${SRC:.c=.o}
 
