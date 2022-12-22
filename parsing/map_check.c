@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/21 18:52:47 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:43:01 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int	map_check(t_data *data)
 {
 	int	i;
 	int	j;
+	int	player_check;
 
 	i = 0;
+	player_check = 0;
 	if (!data->map[0] || !wall_check(data))
 		return (0);
 	while (data->map[i])
@@ -74,9 +76,14 @@ int	map_check(t_data *data)
 				&& data->map[i][j] != 'S' && data->map[i][j] != 'E'
 				&& data->map[i][j] != 'W')
 				return (0);
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
+				player_check++;
 			j++;
 		}
 		i++;
 	}
+	if (player_check != 1)
+		return (0);
 	return (1);
 }

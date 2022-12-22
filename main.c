@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/21 20:43:31 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/22 23:10:18 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,27 @@ int close_win(void *param)
 	exit(0);
 }
 
-void draw_player(t_data *data, int h, int w) // witdh = 180 : height = 510
-{
-	data->ap = h / 2; // data-> a = 90
-	data->bp = w / 2; // data-> b = 255
-	int v1 = data->ap / 18;
-	int v2 = data->bp / 18;
-	int radius = v1 * v2;
-	printf("%d\n", radius);
-	data->xp = 0;
-	while(data->xp < h * 30)
-	{
-		data->yp = 0;
-		while(data->yp < w * 30)
-		{
-			if (((data->xp - data->ap) * (data->xp - data->ap)) + ((data->yp - data->bp) * (data->yp - data->bp)) <=  radius)
-				my_mlx_pixel_put(data, data->xp, data->yp, 0xff0000);
-			data->yp++;
-		}
-		data->xp++;
-	}
-}
+// void draw_player(t_data *data, int h, int w) // witdh = 180 : height = 510
+// {
+// 	data->ap = h / 2; // data-> a = 90
+// 	data->bp = w / 2; // data-> b = 255
+// 	int v1 = data->ap / 18;
+// 	int v2 = data->bp / 18;
+// 	int radius = v1 * v2;
+// 	printf("%d\n", radius);
+// 	data->xp = 0;
+// 	while(data->xp < h * 30)
+// 	{
+// 		data->yp = 0;
+// 		while(data->yp < w * 30)
+// 		{
+// 			if (((data->xp - data->ap) * (data->xp - data->ap)) + ((data->yp - data->bp) * (data->yp - data->bp)) <=  radius)
+// 				my_mlx_pixel_put(data, data->xp, data->yp, 0xff0000);
+// 			data->yp++;
+// 		}
+// 		data->xp++;
+// 	}
+// }
 
 void draw(t_data *data, int color, int scale, double x, double y)
 {
@@ -73,33 +73,56 @@ void draw(t_data *data, int color, int scale, double x, double y)
 	}
 }
 
+void draw_player(t_data *data, int color, double x, double y)
+{
+	int holdx = x * 30,holdy;
+	while(holdx < (x + 1) * 28)
+	{
+		holdy = y * 30;
+		while(holdy < (y + 1) * 22)
+		{
+			my_mlx_pixel_put(data, holdx, holdy, color);
+			holdy++;
+		}
+		holdx++;
+	}
+}
+
 void draw_map(t_data *data)
 {
 	int i;
 	int j;
-	int y;
-	int x = 0;
+	int y = 0;
+	int x;
 	
 	i = 0;
 	image(data);
-	while (data->splitted_array[i])
+	while (data->map[i])
 	{
-		y = 0;
+		x = 0;
 		j = 0;
-		while (data->splitted_array[i][j])
+		while (data->map[i][j])
 		{
-			if (data->splitted_array[i][j] == '1')
-				draw(data, 0x0000fff, 30, y, x);
-			else if (data->splitted_array[i][j] == '0' || data->splitted_array[i][j] == 'E')
+			if (data->map[i][j] == '1')
+				draw(data, 0x0000fff, 30, x, y);
+			else if (data->map[i][j] == '0')
 			{
-				draw(data, 0xfffffff, 30, y, x);
-				draw(data, 0xff0000, 1, data->player_x *30 + 15, data->player_y * 30 + 15);
+				draw(data, 0xfffffff, 30, x, y);
+			}
+			else if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
+			{
+				printf("x = %d, y = %d\n", x, y);
+				draw(data, 0xfffffff, 30, x, y);
+				draw(data, 0xff0000, 30, data->player_x, data->player_y);
+				// data->player_x = x;
+				// data->player_y = y;
 			}
 			j++;
-			y++;
+			x++;
 		}
 		i++;
-		x++;
+		y++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }
@@ -107,19 +130,43 @@ int ft_moves(int key, t_data *data)
 {
 	if (key == W)
 	{
-		if (data->splitted_array[(int)round(data->player_y)][(int)round(data->player_x)] != '1')
-			data->player_y -= 0.1;
+		if (data->map[(int)round(data->player_y - 1)][(int)round(data->player_x)] == '1')
+			return (0);
+		data->map[(int)data->player_y][(int)data->player_x] = '0';
+			data->player_y -= 1;
+		data->map[(int)data->player_y][(int)data->player_x] = 'N';
 		printf("player_x -- %d,  player_y -- %d\n", (int)round(data->player_x), (int)round(data->player_y));
 	}
 	if(key == S)
 	{
-		data->player_y += 0.1;
+		if (data->map[(int)round(data->player_y + 1)][(int)round(data->player_x)] == '1')
+			return (0);
+		data->map[(int)data->player_y][(int)data->player_x] = '0';
+		data->player_y += 1;
+		data->map[(int)data->player_y][(int)data->player_x] = 'N';
 			printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
 	}
 	if(key == D)
-		data->player_x += 0.1;
+	{
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x + 1)] == '1')
+			return (0);
+		data->map[(int)data->player_y][(int)data->player_x] = '0';
+		data->player_x += 1;
+		data->map[(int)data->player_y][(int)data->player_x] = 'N';
+	}
 	if(key == A)
-		data->player_x -= 0.1;
+	{
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x - 1)] == '1')
+			return (0);
+		data->map[(int)data->player_y][(int)data->player_x] = '0';
+		data->player_x -= 1;
+		data->map[(int)data->player_y][(int)data->player_x] = 'N';
+	}
+	if (key == ESC)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		exit (1);
+	}
 	mlx_destroy_image(data->mlx, data->img.img);
 	draw_map(data);
 	return (0);
@@ -130,7 +177,7 @@ int	main(int ac, char **av)
 	t_data data;
 	int	fd;
 	char *ret;
-	char **splitted_array;
+	// char **map;
 	
 	if (ac == 2)
 	{
@@ -149,14 +196,14 @@ int	main(int ac, char **av)
 		// data.mlx = mlx_init();
 		// data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 		// mlx_loop(data.mlx);
-		ret = get_next_line(fd);
-		data.splitted_array = ft_split(ret, '\n');
-		data.Columns = ft_strlen(data.splitted_array[0]);
-		data.Rows = ft_countRows(data.splitted_array);
+		// ret = get_next_line(fd);
+		// data.splitted_array = ft_split(ret, '\n');
+		data.Columns = ft_strlen(data.map[0]);
+		data.Rows = ft_countRows(data.map);
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
-		data.player_x = 1;
-		data.player_y = 2;
+		data.player_x = 9;
+		data.player_y = 1;
 		data.playerX = 1;
 		data.playerY = 1;
 		draw_map(&data);
