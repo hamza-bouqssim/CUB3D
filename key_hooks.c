@@ -4,37 +4,27 @@ int ft_moves(int key, t_data *data)
 {
 	if (key == W)
 	{
-		if (data->map[(int)round(data->player_y - 1)][(int)round(data->player_x)] == '1')
+		if (data->map[(int)round(data->player_y - 0.2)][(int)round(data->player_x)] == '1')
 			return (0);
-		data->map[(int)data->player_y][(int)data->player_x] = '0';
-			data->player_y -= 1;
-		data->map[(int)data->player_y][(int)data->player_x] = 'N';
-		printf("player_x -- %d,  player_y -- %d\n", (int)round(data->player_x), (int)round(data->player_y));
+			data->player_y -= 0.2;
 	}
 	if(key == S)
 	{
-		if (data->map[(int)round(data->player_y + 1)][(int)round(data->player_x)] == '1')
+		if (data->map[(int)round(data->player_y + 0.2)][(int)round(data->player_x)] == '1')
 			return (0);
-		data->map[(int)data->player_y][(int)data->player_x] = '0';
-		data->player_y += 1;
-		data->map[(int)data->player_y][(int)data->player_x] = 'N';
-			printf("player_x -- %f,  player_y -- %f\n", data->player_x, data->player_y);
+		data->player_y += 0.2;
 	}
 	if(key == D)
 	{
-		if (data->map[(int)round(data->player_y)][(int)round(data->player_x + 1)] == '1')
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x + 0.2)] == '1')
 			return (0);
-		data->map[(int)data->player_y][(int)data->player_x] = '0';
-		data->player_x += 1;
-		data->map[(int)data->player_y][(int)data->player_x] = 'N';
+		data->player_x += 0.2;
 	}
 	if(key == A)
 	{
-		if (data->map[(int)round(data->player_y)][(int)round(data->player_x - 1)] == '1')
+		if (data->map[(int)round(data->player_y)][(int)round(data->player_x - 0.2)] == '1')
 			return (0);
-		data->map[(int)data->player_y][(int)data->player_x] = '0';
-		data->player_x -= 1;
-		data->map[(int)data->player_y][(int)data->player_x] = 'N';
+		data->player_x -= 0.2;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
 	draw_map(data);

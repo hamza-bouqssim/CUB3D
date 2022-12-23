@@ -15,13 +15,35 @@ void draw(t_data *data, int color, int scale, double x, double y)
 	}
 }
 
-void draw_player(t_data *data, int color, double x, double y)
+void    circle(t_data *data, double x, double y, int r, int color)
 {
-	int holdx = x * 30,holdy;
-	while(holdx < (x + 1) * 28)
+    double    angle;
+    double    x1;
+    double    y1;
+
+	x = x * 30 + 15;
+	y = y * 30 + 15;
+    while (r)
+    {
+        angle = 0;
+        while (angle < 360)
+        {
+            x1 = r * cos(angle * M_PI / 180);
+            y1 = r * sin(angle * M_PI / 180);
+            my_mlx_pixel_put(data, x + x1, y + y1, color);
+            angle += 0.1;
+        }
+        r--;
+    }
+}
+
+void draw_player(t_data *data, int color, int scale, double x, double y)
+{
+	int holdx = (x * scale) + 10,holdy;
+	while(holdx < (x + 1) * scale - 10)
 	{
-		holdy = y * 30;
-		while(holdy < (y + 1) * 22)
+		holdy = (y * scale) + 10;
+		while(holdy < (y + 1) * scale - 10)
 		{
 			my_mlx_pixel_put(data, holdx, holdy, color);
 			holdy++;
@@ -54,11 +76,10 @@ void draw_map(t_data *data)
 			else if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
-				printf("x = %d, y = %d\n", x, y);
+				data->player_x = x;
+				data->player_y = y;
+				data->map[i][j] = '0';
 				draw(data, 0xfffffff, 30, x, y);
-				draw(data, 0xff0000, 30, data->player_x, data->player_y);
-				// data->player_x = x;
-				// data->player_y = y;
 			}
 			j++;
 			x++;
@@ -66,5 +87,6 @@ void draw_map(t_data *data)
 		i++;
 		y++;
 	}
+	circle(data, data->player_x, data->player_y, 4, 0xff0000);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }
