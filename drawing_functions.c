@@ -108,16 +108,28 @@ void draw_map(t_data *data)
 			{
 				data->player.x = x;
 				data->player.y = y;
-				data->player.rot_speed = 8 * (M_PI / 180);
+				data->player.rot_speed = 15 * (M_PI / 180);
 				data->player.move_speed = 2.0;
 				if (data->map[i][j] == 'N')
+				{
 					data->player.rot_angle = 3 * M_PI / 2;
+					data->player.see_angle = 0;
+				}
 				else if (data->map[i][j] == 'S')
+				{
 					data->player.rot_angle = M_PI / 2;
+					data->player.see_angle = M_PI;
+				}
 				else if (data->map[i][j] == 'E')
+				{
 					data->player.rot_angle = 0;
+					data->player.see_angle = M_PI / 2;
+				}
 				else if (data->map[i][j] == 'W')
+				{
 					data->player.rot_angle = M_PI;
+					data->player.see_angle = 3 * M_PI / 2;
+				}
 				data->map[i][j] = '0';
 				draw(data, 0xfffffff, 30, x, y);
 			}

@@ -7,7 +7,7 @@ int ft_moves(int key, t_data *data)
 	{
 		data->player.direction = 0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y - 0.2)][(int)round(data->player.x)] == '1')
+		if (data->map[(int)round(data->player.y + 0.2)][(int)round(data->player.x)] == '1')
 			return (0);
 		data->player.x += cos(data->player.rot_angle) * move;
 		data->player.y += sin(data->player.rot_angle) * move;
@@ -16,33 +16,40 @@ int ft_moves(int key, t_data *data)
 	{
 		data->player.direction = -0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y + 0.2)][(int)round(data->player.x)] == '1')
+		if (data->map[(int)round(data->player.y - 0.2)][(int)round(data->player.x)] == '1')
 			return (0);
-		// data->player.y += 0.2;
 		data->player.x += cos(data->player.rot_angle) * move;
 		data->player.y += sin(data->player.rot_angle) * move;
 	}
 	if(key == D)
 	{
-		if (data->map[(int)round(data->player.y)][(int)round(data->player.x + 0.2)] == '1')
+		data->player.direction = 0.1;
+		move = data->player.direction * data->player.move_speed;
+		if (data->map[(int)round(data->player.y)][(int)round(data->player.x - 0.2)] == '1')
 			return (0);
-		data->player.x += 0.2;
+		data->player.x += cos(data->player.see_angle) * move;
+		data->player.y += sin(data->player.see_angle) * move;
 	}
 	if(key == A)
 	{
-		if (data->map[(int)round(data->player.y)][(int)round(data->player.x - 0.2)] == '1')
+		data->player.direction = -0.1;
+		move = data->player.direction * data->player.move_speed;
+		if (data->map[(int)round(data->player.y)][(int)round(data->player.x + 0.2)] == '1')
 			return (0);
-		data->player.x -= 0.2;
+		data->player.x += cos(data->player.see_angle) * move;
+		data->player.y += sin(data->player.see_angle) * move;
 	}
 	if (key == RIGHT)
 	{
-		data->player.turn = 1;
+		data->player.turn = 0.5;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+		data->player.see_angle += data->player.turn * data->player.rot_speed;
 	}
 	if (key == LEFT)
 	{
-		data->player.turn = -1;
+		data->player.turn = -0.5;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+		data->player.see_angle += data->player.turn * data->player.rot_speed;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
 	draw_map(data);
