@@ -116,7 +116,7 @@ void draw_map(t_data *data)
 				data->player.x = x;
 				data->player.y = y;
 				data->player.rot_speed = 8 * (M_PI / 180);
-				data->player.move_speed = 0.5;
+				data->player.move_speed = 1;
 				if (data->map[i][j] == 'N')
 					data->player.rot_angle = 3 * M_PI / 2;
 				else if (data->map[i][j] == 'S')

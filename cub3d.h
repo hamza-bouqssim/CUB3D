@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/24 21:04:09 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:41:53 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 
 # define BUFFER_SIZE 1
-# define HEIGHT 1000
-# define WIDTH 1000
+# define HEIGHT 1100
+# define WIDTH 1100
 
 //keys
 # define UP 126
