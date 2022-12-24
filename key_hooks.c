@@ -42,41 +42,52 @@ int	ft_released(int key, t_data *data)
 int ft_moves(t_data *data)
 {
 	double	move;
+	double	x_wall;
+	double	y_wall;
+
 	if (data->w_pressed)
 	{
 		data->player.direction = 0.1;
 		move = data->player.direction * data->player.move_speed;
-		// if (data->map[(int)round(data->player.y + 0.2)][(int)round(data->player.x)] == '1')
-		// 	return (0);
-		data->player.x += cos(data->player.rot_angle) * move;
-		data->player.y += sin(data->player.rot_angle) * move;
+		x_wall = data->player.x + cos(data->player.rot_angle) * move;
+		y_wall = data->player.y + sin(data->player.rot_angle) * move;
+		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
+			return (0);
+		data->player.x = x_wall;
+		data->player.y = y_wall;
 	}
 	if(data->s_pressed)
 	{
 		data->player.direction = -0.1;
 		move = data->player.direction * data->player.move_speed;
-		// if (data->map[(int)round(data->player.y - 0.2)][(int)round(data->player.x)] == '1')
-		// 	return (0);
-		data->player.x += cos(data->player.rot_angle) * move;
-		data->player.y += sin(data->player.rot_angle) * move;
+		x_wall = data->player.x + cos(data->player.rot_angle) * move;
+		y_wall = data->player.y + sin(data->player.rot_angle) * move;
+		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
+			return (0);
+		data->player.x = x_wall;
+		data->player.y = y_wall;
 	}
 	if(data->d_pressed)
 	{
 		data->player.direction = 0.1;
 		move = data->player.direction * data->player.move_speed;
-		// if (data->map[(int)round(data->player.y)][(int)round(data->player.x - 0.2)] == '1')
-		// 	return (0);
-		data->player.x += cos(data->player.rot_angle + (M_PI / 2)) * move;
-		data->player.y += sin(data->player.rot_angle + (M_PI / 2)) * move;
+		x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;
+		y_wall = data->player.y + sin(data->player.rot_angle + (M_PI / 2)) * move;
+		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
+			return (0);
+		data->player.x = x_wall;
+		data->player.y = y_wall;
 	}
 	if(data->a_pressed)
 	{
 		data->player.direction = -0.1;
 		move = data->player.direction * data->player.move_speed;
-		// if (data->map[(int)round(data->player.y)][(int)round(data->player.x + 0.2)] == '1')
-		// 	return (0);
-		data->player.x += cos(data->player.rot_angle + (M_PI / 2)) * move;
-		data->player.y += sin(data->player.rot_angle + (M_PI / 2)) * move;
+		x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;
+		y_wall = data->player.y + sin(data->player.rot_angle + (M_PI / 2)) * move;
+		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
+			return (0);
+		data->player.x = x_wall;
+		data->player.y = y_wall;
 	}
 	if (data->ri_pressed)
 	{

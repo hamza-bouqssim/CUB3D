@@ -3,12 +3,19 @@
 void draw(t_data *data, int color, int scale, double x, double y)
 {
 	int holdx = x * scale,holdy;
+	int	color2 = 0x000000;
+	int	first = holdx;
+	int last = (x + 1) * scale;
 	while(holdx < (x + 1) * scale)
 	{
 		holdy = y * scale;
 		while(holdy < (y + 1) * scale)
 		{
-			my_mlx_pixel_put(data, holdx, holdy, color);
+			if (holdx == first || holdx == last - 1 || holdy == y * scale
+				|| holdy == (y + 1) * last - 1)
+				my_mlx_pixel_put(data, holdx, holdy, color2);
+			else
+				my_mlx_pixel_put(data, holdx, holdy, color);
 			holdy++;
 		}
 		holdx++;
@@ -108,8 +115,8 @@ void draw_map(t_data *data)
 			{
 				data->player.x = x;
 				data->player.y = y;
-				data->player.rot_speed = 15 * (M_PI / 180);
-				data->player.move_speed = 2.0;
+				data->player.rot_speed = 8 * (M_PI / 180);
+				data->player.move_speed = 0.5;
 				if (data->map[i][j] == 'N')
 					data->player.rot_angle = 3 * M_PI / 2;
 				else if (data->map[i][j] == 'S')
