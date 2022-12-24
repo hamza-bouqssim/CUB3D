@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/24 19:45:28 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/24 21:04:09 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_player
     double	x;
     double	y;
 	double	rot_angle;
-	double	see_angle;
 	double	rot_speed;
 	double	move_speed;
 	double	direction;
@@ -75,7 +74,12 @@ typedef struct s_data
     int yp;
     int ap;
     int bp;
-    int playerX;
+    int w_pressed;
+    int a_pressed;
+    int s_pressed;
+    int d_pressed;
+    int ri_pressed;
+    int le_pressed;
     int playerY;
     char **splitted_array;
 	t_player	player;
@@ -110,8 +114,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    draw(t_data *data, int color, int scale, double x, double y);
 void    draw_player(t_data *data, int color, int scale, double x, double y);
 void    draw_map(t_data *data);
-int     ft_keys(int keycode, t_data *data);
-int     ft_moves(int key, t_data *data);
+int     ft_keys(t_data *data);
+int     ft_moves(t_data *data);
+int	ft_pressed(int key, t_data *data);
+int	ft_released(int key, t_data *data);
 //________________________
 
 #endif

@@ -1,70 +1,102 @@
 #include "cub3d.h"
 
-int ft_moves(int key, t_data *data)
+int	ft_pressed(int key, t_data *data)
+{
+	if (key == W)
+		data->w_pressed = 1;
+	if (key == A)
+		data->a_pressed = 1;
+	if (key == S)
+		data->s_pressed = 1;
+	if (key == D)
+		data->d_pressed = 1;
+	if (key == RIGHT)
+		data->ri_pressed = 1;
+	if (key == LEFT)
+		data->le_pressed = 1;
+	if (key == ESC || key == Q)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		exit (1);
+	}
+	return (0);
+}
+
+int	ft_released(int key, t_data *data)
+{
+	if (key == W)
+		data->w_pressed = 0;
+	if (key == A)
+		data->a_pressed = 0;
+	if (key == S)
+		data->s_pressed = 0;
+	if (key == D)
+		data->d_pressed = 0;
+	if (key == RIGHT)
+		data->ri_pressed = 0;
+	if (key == LEFT)
+		data->le_pressed = 0;
+	return (0);
+}
+
+int ft_moves(t_data *data)
 {
 	double	move;
-	if (key == W)
+	if (data->w_pressed)
 	{
 		data->player.direction = 0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y + 0.2)][(int)round(data->player.x)] == '1')
-			return (0);
+		// if (data->map[(int)round(data->player.y + 0.2)][(int)round(data->player.x)] == '1')
+		// 	return (0);
 		data->player.x += cos(data->player.rot_angle) * move;
 		data->player.y += sin(data->player.rot_angle) * move;
 	}
-	if(key == S)
+	if(data->s_pressed)
 	{
 		data->player.direction = -0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y - 0.2)][(int)round(data->player.x)] == '1')
-			return (0);
+		// if (data->map[(int)round(data->player.y - 0.2)][(int)round(data->player.x)] == '1')
+		// 	return (0);
 		data->player.x += cos(data->player.rot_angle) * move;
 		data->player.y += sin(data->player.rot_angle) * move;
 	}
-	if(key == D)
+	if(data->d_pressed)
 	{
 		data->player.direction = 0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y)][(int)round(data->player.x - 0.2)] == '1')
-			return (0);
-		data->player.x += cos(data->player.see_angle) * move;
-		data->player.y += sin(data->player.see_angle) * move;
+		// if (data->map[(int)round(data->player.y)][(int)round(data->player.x - 0.2)] == '1')
+		// 	return (0);
+		data->player.x += cos(data->player.rot_angle + (M_PI / 2)) * move;
+		data->player.y += sin(data->player.rot_angle + (M_PI / 2)) * move;
 	}
-	if(key == A)
+	if(data->a_pressed)
 	{
 		data->player.direction = -0.1;
 		move = data->player.direction * data->player.move_speed;
-		if (data->map[(int)round(data->player.y)][(int)round(data->player.x + 0.2)] == '1')
-			return (0);
-		data->player.x += cos(data->player.see_angle) * move;
-		data->player.y += sin(data->player.see_angle) * move;
+		// if (data->map[(int)round(data->player.y)][(int)round(data->player.x + 0.2)] == '1')
+		// 	return (0);
+		data->player.x += cos(data->player.rot_angle + (M_PI / 2)) * move;
+		data->player.y += sin(data->player.rot_angle + (M_PI / 2)) * move;
 	}
-	if (key == RIGHT)
+	if (data->ri_pressed)
 	{
 		data->player.turn = 0.5;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
-		data->player.see_angle += data->player.turn * data->player.rot_speed;
 	}
-	if (key == LEFT)
+	if (data->le_pressed)
 	{
 		data->player.turn = -0.5;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
-		data->player.see_angle += data->player.turn * data->player.rot_speed;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
 	draw_map(data);
 	return (0);
 }
 
-int ft_keys(int keycode, t_data *data)
+int ft_keys(t_data *data)
 {
-	if(keycode == W || keycode == S || keycode == D || keycode == A
-		|| keycode == RIGHT || keycode == LEFT)
-		ft_moves(keycode, data);
-	if (keycode == ESC || keycode == Q)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit (1);
-	}
+	if(data->w_pressed || data->s_pressed || data->d_pressed || data->a_pressed
+		|| data->ri_pressed || data->le_pressed)
+		ft_moves(data);
 	return (0);
 }
