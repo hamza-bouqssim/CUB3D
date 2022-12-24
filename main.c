@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/23 14:57:24 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/24 15:54:39 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	main(int ac, char **av)
 		data.Rows = ft_countRows(data.map);
 		data.mlx = mlx_init();
 		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
-		data.player_x = 9;
-		data.player_y = 1;
 		draw_map(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_keys, &data);

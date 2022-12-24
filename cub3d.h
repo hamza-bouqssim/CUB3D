@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/23 14:55:14 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/24 17:48:26 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_player
+{
+    double	x;
+    double	y;
+	double	rot_angle;
+	double	rot_speed;
+	double	move_speed;
+	double	direction;
+	int		turn;
+}	t_player;
+
 typedef struct s_data
 {
     void *mlx;
@@ -65,9 +76,8 @@ typedef struct s_data
     int bp;
     int playerX;
     int playerY;
-    double player_x;
-    double player_y;
     char **splitted_array;
+	t_player	player;
     t_image img;
 	char	*line;
 	char	**spl;

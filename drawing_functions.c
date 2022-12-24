@@ -15,6 +15,36 @@ void draw(t_data *data, int color, int scale, double x, double y)
 	}
 }
 
+void	line(t_data *data, double x1, double y1)
+{
+	double	x;
+	double	y;
+	double	x_distance;
+	double	y_distance;
+	double	x_inc;
+	double	y_inc;
+	int		steps;
+	int		i;
+
+	x = data->player.x * 30 + 15;
+	y = data->player.y * 30 + 15;
+	x1 = x1 * 30 + 15 + cos(data->player.rot_angle) * 20;
+	y1 = y1 * 30 + 15 + sin(data->player.rot_angle) * 20;
+	x_distance = x1 - x;
+	y_distance = y1 - y;
+	steps = fmax(fabs(x_distance), fabs(y_distance));
+	x_inc = x_distance / (double)steps;
+	y_inc = y_distance / (double)steps;
+	i = 0;
+	while (i < steps)
+	{
+		my_mlx_pixel_put(data, x, y, 0xff0000);
+		x += x_inc;
+		y += y_inc;
+		i++;
+	}
+}
+
 void    circle(t_data *data, double x, double y, int r, int color)
 {
     double    angle;
@@ -76,8 +106,18 @@ void draw_map(t_data *data)
 			else if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
-				data->player_x = x;
-				data->player_y = y;
+				data->player.x = x;
+				data->player.y = y;
+				data->player.rot_speed = 8 * (M_PI / 180);
+				data->player.move_speed = 2.0;
+				if (data->map[i][j] == 'N')
+					data->player.rot_angle = 3 * M_PI / 2;
+				else if (data->map[i][j] == 'S')
+					data->player.rot_angle = M_PI / 2;
+				else if (data->map[i][j] == 'E')
+					data->player.rot_angle = 0;
+				else if (data->map[i][j] == 'W')
+					data->player.rot_angle = M_PI;
 				data->map[i][j] = '0';
 				draw(data, 0xfffffff, 30, x, y);
 			}
@@ -87,6 +127,7 @@ void draw_map(t_data *data)
 		i++;
 		y++;
 	}
-	circle(data, data->player_x, data->player_y, 4, 0xff0000);
+	circle(data, data->player.x, data->player.y, 4, 0xff0000);
+	line(data, data->player.x, data->player.y);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }
