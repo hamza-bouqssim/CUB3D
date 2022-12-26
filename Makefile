@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/22 23:33:27 by hbouqssi         ###   ########.fr        #
+#    Updated: 2022/12/25 17:29:49 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC = main.c \
 	tools/get_next_line_utils.c \
 	utils.c \
 	drawing_functions.c \
-	key_hooks.c
+	key_hooks.c \
+	moves.c
 
 OBJ = ${SRC:.c=.o}
 

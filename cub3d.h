@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/24 22:41:53 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/26 20:06:13 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 
 # define BUFFER_SIZE 1
-# define HEIGHT 1100
-# define WIDTH 1100
+# define HEIGHT 1000
+# define WIDTH 1000
 
 //keys
 # define UP 126
@@ -60,6 +60,18 @@ typedef struct s_player
 	double	turn;
 }	t_player;
 
+typedef struct s_rays
+{
+	double	view_angle;
+	double	num_rays;
+	double	ray_angle;
+	double	wall_x;
+	double	wall_y;
+	double	distance;
+	int		is_down;
+	int		is_right;
+}	t_rays;
+
 typedef struct s_data
 {
     void *mlx;
@@ -83,6 +95,7 @@ typedef struct s_data
     int playerY;
     char **splitted_array;
 	t_player	player;
+	t_rays	rays;
     t_image img;
 	char	*line;
 	char	**spl;
@@ -112,12 +125,16 @@ int     close_win(void *param);
 void	image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    draw(t_data *data, int color, int scale, double x, double y);
-void    draw_player(t_data *data, int color, int scale, double x, double y);
 void    draw_map(t_data *data);
 int     ft_keys(t_data *data);
 int     ft_moves(t_data *data);
-int	ft_pressed(int key, t_data *data);
-int	ft_released(int key, t_data *data);
+int		ft_pressed(int key, t_data *data);
+int		ft_released(int key, t_data *data);
+void	w_move(t_data *data, double move, double x_wall, double y_wall);
+void	s_move(t_data *data, double move, double x_wall, double y_wall);
+void	d_move(t_data *data, double move, double x_wall, double y_wall);
+void	a_move(t_data *data, double move, double x_wall, double y_wall);
+int	wall_check(t_data *data, double y, double x);
 //________________________
 
 #endif

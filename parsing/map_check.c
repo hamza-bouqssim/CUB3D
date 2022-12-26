@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/22 20:43:01 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/26 20:14:15 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	checker(t_data *data, int i, int j, int last)
 	return (1);
 }
 
-static int	wall_check(t_data *data)
+static int	check_wall(t_data *data)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,7 @@ int	map_check(t_data *data)
 
 	i = 0;
 	player_check = 0;
-	if (!data->map[0] || !wall_check(data))
+	if (!data->map[0] || !check_wall(data))
 		return (0);
 	while (data->map[i])
 	{

@@ -39,64 +39,28 @@ int	ft_released(int key, t_data *data)
 	return (0);
 }
 
-int ft_moves(t_data *data)
+int	ft_moves(t_data *data)
 {
 	double	move;
 	double	x_wall;
 	double	y_wall;
 
 	if (data->w_pressed)
-	{
-		data->player.direction = 0.1;
-		move = data->player.direction * data->player.move_speed;
-		x_wall = data->player.x + cos(data->player.rot_angle) * move;
-		y_wall = data->player.y + sin(data->player.rot_angle) * move;
-		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
-			return (0);
-		data->player.x = x_wall;
-		data->player.y = y_wall;
-	}
-	if(data->s_pressed)
-	{
-		data->player.direction = -0.1;
-		move = data->player.direction * data->player.move_speed;
-		x_wall = data->player.x + cos(data->player.rot_angle) * move;
-		y_wall = data->player.y + sin(data->player.rot_angle) * move;
-		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
-			return (0);
-		data->player.x = x_wall;
-		data->player.y = y_wall;
-	}
-	if(data->d_pressed)
-	{
-		data->player.direction = 0.1;
-		move = data->player.direction * data->player.move_speed;
-		x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;
-		y_wall = data->player.y + sin(data->player.rot_angle + (M_PI / 2)) * move;
-		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
-			return (0);
-		data->player.x = x_wall;
-		data->player.y = y_wall;
-	}
-	if(data->a_pressed)
-	{
-		data->player.direction = -0.1;
-		move = data->player.direction * data->player.move_speed;
-		x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;
-		y_wall = data->player.y + sin(data->player.rot_angle + (M_PI / 2)) * move;
-		if (data->map[(int)round(y_wall)][(int)round(x_wall)] == '1')
-			return (0);
-		data->player.x = x_wall;
-		data->player.y = y_wall;
-	}
+		w_move(data, move, x_wall, y_wall);
+	if (data->s_pressed)
+		s_move(data, move, x_wall, y_wall);
+	if (data->d_pressed)
+		d_move(data, move, x_wall, y_wall);
+	if (data->a_pressed)
+		a_move(data, move, x_wall, y_wall);
 	if (data->ri_pressed)
 	{
-		data->player.turn = 0.5;
+		data->player.turn = 1;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
 	}
 	if (data->le_pressed)
 	{
-		data->player.turn = -0.5;
+		data->player.turn = -1;
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
@@ -104,9 +68,9 @@ int ft_moves(t_data *data)
 	return (0);
 }
 
-int ft_keys(t_data *data)
+int	ft_keys(t_data *data)
 {
-	if(data->w_pressed || data->s_pressed || data->d_pressed || data->a_pressed
+	if (data->w_pressed || data->s_pressed || data->d_pressed || data->a_pressed
 		|| data->ri_pressed || data->le_pressed)
 		ft_moves(data);
 	return (0);

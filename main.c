@@ -6,18 +6,31 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/24 21:21:09 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/25 18:58:35 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_data(t_data *data)
+{
+	data->Columns = ft_strlen(data->map[0]);
+	data->Rows = ft_countRows(data->map);
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
+	data->w_pressed = 0;
+	data->a_pressed = 0;
+	data->s_pressed = 0;
+	data->d_pressed = 0;
+	data->ri_pressed = 0;
+	data->le_pressed = 0;
+}
+
 int	main(int ac, char **av)
 {
-	t_data data;
-	int	fd;
-	char *ret;
-	// char **map;
+	t_data	data;
+	int		fd;
+	char	*ret;
 	
 	if (ac == 2)
 	{
@@ -33,16 +46,7 @@ int	main(int ac, char **av)
 			write(2, "Error\nNot valid", 15);
 			return (0);
 		}
-		data.Columns = ft_strlen(data.map[0]);
-		data.Rows = ft_countRows(data.map);
-		data.mlx = mlx_init();
-		data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
-		data.w_pressed = 0;
-		data.a_pressed = 0;
-		data.s_pressed = 0;
-		data.d_pressed = 0;
-		data.ri_pressed = 0;
-		data.le_pressed = 0;
+		init_data(&data);
 		draw_map(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);
