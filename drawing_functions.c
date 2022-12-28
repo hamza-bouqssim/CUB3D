@@ -26,7 +26,7 @@ void	draw(t_data *data, int color, int scale, double x, double y)
 	}
 }
 
-void	ray_line(t_data *data, double x1, double y1, double angle)
+void	ray_line(t_data *data, double x1, double y1)
 {
 	double	x;
 	double	y;
@@ -37,10 +37,6 @@ void	ray_line(t_data *data, double x1, double y1, double angle)
 
 	x = data->player.x;
 	y = data->player.y;
-	// x1 = x1 * 30;
-	// y1 = y1 * 30;
-	// x1 = x1 + cos(angle);
-	// y1 = y1 + sin(angle);
 	steps = fmax(fabs(x1 - x), fabs(y1 - y));
 	x_inc = (x1 - x) / (double)steps;
 	y_inc = (y1 - y) / (double)steps;
@@ -74,7 +70,7 @@ void	line(t_data *data, double x1, double y1, double angle)
 	i = 0;
 	while (i < steps)
 	{
-		my_mlx_pixel_put(data, roundf(x), roundf(y), 0xff0000);
+		my_mlx_pixel_put(data, x, y, 0xff0000);
 		x += x_inc;
 		y += y_inc;
 		i++;
@@ -138,6 +134,61 @@ void	init_rays(t_data *data)
 		data->rays.is_right = 1;
 }
 
+double	distance_points(double x1, double y1, double x2, double y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+void	vertical_check(t_data *data, int column)
+{
+	double	xstep;
+	double	ystep;
+	double	xintercept;
+	double	yintercept;
+	double	next_x;
+	double	next_y;
+	int		foundWall;
+
+	foundWall = 0;
+	data->rays.v_wall_x = 0;
+	data->rays.v_wall_y = 0;
+	xintercept = floor(data->player.x / 30) * 30;
+	if (data->rays.is_right)
+		xintercept += 30;
+	yintercept = data->player.y + (xintercept - data->player.x) * tan(data->rays.ray_angle);
+	xstep = 30;
+	if (!data->rays.is_right)
+		xstep *= -1;
+	ystep = 30 * tan(data->rays.ray_angle);
+	if (!data->rays.is_down && ystep > 0)
+		ystep *= -1;
+	else if (data->rays.is_down && ystep < 0)
+		ystep *= -1;
+	next_x = xintercept;
+	next_y = yintercept;
+	if (!data->rays.is_right)
+		next_x--;
+	while (next_x >= 0 && next_x <= data->Columns * 30 && next_y >= 0 && next_y <= data->Rows * 30)
+	{
+		if (wall_check(data, next_y, next_x))
+		{
+			foundWall = 1;
+			data->rays.v_wall_x = next_x;
+			data->rays.v_wall_y = next_y;
+			break ;
+		}
+		else
+		{
+			next_x += xstep;
+			next_y += ystep;
+		}
+	}
+	if (foundWall)
+		data->rays.v_distance = distance_points(data->player.x, data->player.y, data->rays.v_wall_x, data->rays.v_wall_y);
+	else
+		data->rays.v_distance = INT_MAX;
+}
+
 void	horizontal_check(t_data *data, int column)
 {
 	double	xstep;
@@ -149,10 +200,12 @@ void	horizontal_check(t_data *data, int column)
 	int		foundWall;
 
 	foundWall = 0;
+	data->rays.h_wall_x = 0;
+	data->rays.h_wall_y = 0;
 	yintercept = floor(data->player.y / 30) * 30;
 	if (data->rays.is_down)
 		yintercept += 30;
-	xintercept = data->player.x + (yintercept - data->player.y / tan(data->rays.ray_angle));
+	xintercept = data->player.x + (yintercept - data->player.y) / tan(data->rays.ray_angle);
 	ystep = 30;
 	if (!data->rays.is_down)
 		ystep *= -1;
@@ -165,13 +218,13 @@ void	horizontal_check(t_data *data, int column)
 	next_y = yintercept;
 	if (!data->rays.is_down)
 		next_y--;
-	// printf("%d     %d\n", (int)next_y, (int)next_x);
 	while (next_x >= 0 && next_x <= data->Columns * 30 && next_y >= 0 && next_y <= data->Rows * 30)
 	{
 		if (wall_check(data, next_y , next_x))
 		{
 			foundWall = 1;
-			ray_line(data, next_x, next_y, data->rays.ray_angle);
+			data->rays.h_wall_x = next_x;
+			data->rays.h_wall_y = next_y;
 			break ;
 		}
 		else
@@ -180,12 +233,16 @@ void	horizontal_check(t_data *data, int column)
 			next_y += ystep;
 		}
 	}
+	if (foundWall)
+		data->rays.h_distance = distance_points(data->player.x, data->player.y, data->rays.h_wall_x, data->rays.h_wall_y);
+	else
+		data->rays.h_distance = INT_MAX;
 }
 
 void	draw_rays(t_data *data)
 {
-	int		i;
-	int		column;
+	int	i;
+	int	column;
 
 	i = 0;
 	column = 0;
@@ -202,6 +259,20 @@ void	draw_rays(t_data *data)
 		if (data->rays.ray_angle < 0)
 			data->rays.ray_angle = (2 * M_PI) + data->rays.ray_angle;
 		horizontal_check(data, column);
+		vertical_check(data, column);
+		if (data->rays.h_distance < data->rays.v_distance)
+		{
+			data->rays.wall_x = data->rays.h_wall_x;
+			data->rays.wall_y = data->rays.h_wall_y;
+			data->rays.distance = data->rays.h_distance;
+		}
+		else
+		{
+			data->rays.wall_x = data->rays.v_wall_x;
+			data->rays.wall_y = data->rays.v_wall_y;
+			data->rays.distance = data->rays.v_distance;
+		}
+		ray_line(data, data->rays.wall_x, data->rays.wall_y);
 		// line(data, data->player.x, data->player.y, data->rays.ray_angle);
 		data->rays.ray_angle += data->rays.view_angle / data->rays.num_rays;
 		i++;
@@ -233,7 +304,7 @@ void	draw_map(t_data *data)
 		y++;
 	}
 	circle(data, data->player.x, data->player.y, 4, 0xff0000);
-	line(data, data->player.x, data->player.y, data->player.rot_angle);
+	// line(data, data->player.x, data->player.y, data->player.rot_angle);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }

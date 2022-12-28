@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/26 20:06:13 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:57:44 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define BUFFER_SIZE 1
 # define HEIGHT 1000
@@ -65,8 +66,14 @@ typedef struct s_rays
 	double	view_angle;
 	double	num_rays;
 	double	ray_angle;
+	double	h_wall_x;
+	double	h_wall_y;
+	double	v_wall_x;
+	double	v_wall_y;
 	double	wall_x;
 	double	wall_y;
+	double	h_distance;
+	double	v_distance;
 	double	distance;
 	int		is_down;
 	int		is_right;
@@ -134,7 +141,7 @@ void	w_move(t_data *data, double move, double x_wall, double y_wall);
 void	s_move(t_data *data, double move, double x_wall, double y_wall);
 void	d_move(t_data *data, double move, double x_wall, double y_wall);
 void	a_move(t_data *data, double move, double x_wall, double y_wall);
-int	wall_check(t_data *data, double y, double x);
+int		wall_check(t_data *data, double y, double x);
 //________________________
 
 #endif
