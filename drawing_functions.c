@@ -249,6 +249,7 @@ void	draw_rays(t_data *data)
 	init_rays(data);
 	while (i < data->rays.num_rays)
 	{
+		printf("%f\n", data->rays.num_rays);
 		data->rays.is_down = 0;
 		data->rays.is_right = 0;
 		if (data->rays.ray_angle > 0 && data->rays.ray_angle < M_PI)
@@ -279,7 +280,31 @@ void	draw_rays(t_data *data)
 		column++;
 	}
 }
-
+// void projection(t_data *data)
+// {
+// 	int i = 0;
+// 	int y;
+// 	while(i < data->rays.num_rays)
+// 	{
+		
+// 		double distance_project_plane = (WIDTH / 2) / tan(data->rays.view_angle / 2);
+// 		double project_wall_height = (data->scale / data->rays.distance) * distance_project_plane;
+// 		int wall_strip_height = (int)project_wall_height;
+// 		int wall_top_pixel = (HEIGHT / 2) - (wall_strip_height / 2);
+// 		if (wall_top_pixel < 0)
+// 			wall_top_pixel = 0;
+// 		int wall_bottom_pixel = (HEIGHT / 2) + (wall_strip_height / 2);
+// 		if (wall_bottom_pixel > HEIGHT)
+//   			wall_bottom_pixel = HEIGHT;
+// 		y = wall_top_pixel;
+// 		while(y < wall_bottom_pixel)
+// 		{
+// 			my_mlx_pixel_put(data, i , y , 0xffffff);
+// 			y++;
+// 		}
+// 		i++;
+// 	}
+// }
 void	draw_map(t_data *data)
 {
 	int x;
@@ -303,8 +328,9 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
+	// projection(data);
 	circle(data, data->player.x, data->player.y, data->scale / 10, 0xff0000);
-	// line(data, data->player.x, data->player.y, data->player.rot_angle);
+	// // line(data, data->player.x, data->player.y, data->player.rot_angle);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }

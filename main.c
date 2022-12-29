@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/29 15:48:41 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:19:34 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_data(t_data *data)
 {
 	data->Columns = ft_strlen(data->map[0]);
 	data->Rows = ft_countRows(data->map);
-	data->scale = 30;
+	data->scale = 10;
 	data->width = data->Columns * data->scale;
 	data->height = data->Rows * data->scale;
 	data->mlx = mlx_init();
