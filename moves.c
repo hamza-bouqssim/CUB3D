@@ -2,10 +2,10 @@
 
 int	wall_check(t_data *data, double y, double x)
 {
-	if (x < 0 || x > data->Columns * 30 || y < 0 || y > data->Rows * 30)
+	if (x < 0 || x > data->width || y < 0 || y > data->height)
 		return (1);
-	x = floor(x / 30);
-	y = floor(y / 30);
+	x = floor(x / data->scale);
+	y = floor(y / data->scale);
 	if (((int)x < data->Columns && (int)y < data->Rows) && data->map[(int)y][(int)x] == '1')
 		return (1);
 	return (0);

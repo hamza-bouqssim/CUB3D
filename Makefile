@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/28 20:57:08 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/29 15:40:06 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,11 @@ OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-	$(GCC) $(OBJ) -g -lmlx -framework OpenGL -framework AppKit -o  $(NAME)
-
 %.o: %.c cub3d.h ../get_next_line.h
 	$(GCC) -c $< -o $@ -g
+
+$(NAME): $(OBJ) 
+	$(GCC) $(OBJ) -g -lmlx -framework OpenGL -framework AppKit -o  $(NAME)
 
 bonus: all
 

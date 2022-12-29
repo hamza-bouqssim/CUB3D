@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/25 18:58:35 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:48:41 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	init_data(t_data *data)
 {
 	data->Columns = ft_strlen(data->map[0]);
 	data->Rows = ft_countRows(data->map);
+	data->scale = 30;
+	data->width = data->Columns * data->scale;
+	data->height = data->Rows * data->scale;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
 	data->w_pressed = 0;

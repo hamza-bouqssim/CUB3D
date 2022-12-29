@@ -99,10 +99,10 @@ void	circle(t_data *data, double x, double y, int r, int color)
 
 void	player_data(t_data *data, int x, int y)
 {
-	data->player.x = x * 30 + 15;
-	data->player.y = y * 30 + 15;
+	data->player.x = x * data->scale + (data->scale / 2);
+	data->player.y = y * data->scale + (data->scale / 2);
 	data->player.rot_speed = (M_PI / 180);
-	data->player.move_speed = 2.0;
+	data->player.move_speed = 1.0;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
 	else if (data->map[y][x] == 'S')
@@ -112,13 +112,13 @@ void	player_data(t_data *data, int x, int y)
 	else if (data->map[y][x] == 'W')
 		data->player.rot_angle = M_PI;
 	data->map[y][x] = '0';
-	draw(data, 0xfffffff, 30, x, y);
+	draw(data, 0xfffffff, data->scale, x, y);
 }
 
 void	init_rays(t_data *data)
 {
 	data->rays.view_angle = 60 * (M_PI / 180);
-	data->rays.num_rays = data->Columns * 30;
+	data->rays.num_rays = data->width;
 	data->rays.ray_angle = data->player.rot_angle - (data->rays.view_angle / 2);
 	data->rays.ray_angle = fmod(data->rays.ray_angle, 2 * M_PI);
 	if (data->rays.ray_angle < 0)
@@ -152,14 +152,14 @@ void	vertical_check(t_data *data, int column)
 	foundWall = 0;
 	data->rays.v_wall_x = 0;
 	data->rays.v_wall_y = 0;
-	xintercept = floor(data->player.x / 30) * 30;
+	xintercept = floor(data->player.x / data->scale) * data->scale;
 	if (data->rays.is_right)
-		xintercept += 30;
+		xintercept += data->scale;
 	yintercept = data->player.y + (xintercept - data->player.x) * tan(data->rays.ray_angle);
-	xstep = 30;
+	xstep = data->scale;
 	if (!data->rays.is_right)
 		xstep *= -1;
-	ystep = 30 * tan(data->rays.ray_angle);
+	ystep = data->scale * tan(data->rays.ray_angle);
 	if (!data->rays.is_down && ystep > 0)
 		ystep *= -1;
 	else if (data->rays.is_down && ystep < 0)
@@ -168,7 +168,7 @@ void	vertical_check(t_data *data, int column)
 	next_y = yintercept;
 	if (!data->rays.is_right)
 		next_x--;
-	while (next_x >= 0 && next_x <= data->Columns * 30 && next_y >= 0 && next_y <= data->Rows * 30)
+	while (next_x >= 0 && next_x <= data->Columns * data->scale && next_y >= 0 && next_y <= data->Rows * data->scale)
 	{
 		if (wall_check(data, next_y, next_x))
 		{
@@ -202,14 +202,14 @@ void	horizontal_check(t_data *data, int column)
 	foundWall = 0;
 	data->rays.h_wall_x = 0;
 	data->rays.h_wall_y = 0;
-	yintercept = floor(data->player.y / 30) * 30;
+	yintercept = floor(data->player.y / data->scale) * data->scale;
 	if (data->rays.is_down)
-		yintercept += 30;
+		yintercept += data->scale;
 	xintercept = data->player.x + (yintercept - data->player.y) / tan(data->rays.ray_angle);
-	ystep = 30;
+	ystep = data->scale;
 	if (!data->rays.is_down)
 		ystep *= -1;
-	xstep = 30 / tan(data->rays.ray_angle);
+	xstep = data->scale / tan(data->rays.ray_angle);
 	if (!data->rays.is_right && xstep > 0)
 		xstep *= -1;
 	else if (data->rays.is_right && xstep < 0)
@@ -218,7 +218,7 @@ void	horizontal_check(t_data *data, int column)
 	next_y = yintercept;
 	if (!data->rays.is_down)
 		next_y--;
-	while (next_x >= 0 && next_x <= data->Columns * 30 && next_y >= 0 && next_y <= data->Rows * 30)
+	while (next_x >= 0 && next_x <= data->Columns * data->scale && next_y >= 0 && next_y <= data->Rows * data->scale)
 	{
 		if (wall_check(data, next_y , next_x))
 		{
@@ -293,9 +293,9 @@ void	draw_map(t_data *data)
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == '1')
-				draw(data, 0x0000fff, 30, x, y);
+				draw(data, 0x0000fff, data->scale, x, y);
 			else if (data->map[y][x] == '0')
-				draw(data, 0xfffffff, 30, x, y);
+				draw(data, 0xfffffff, data->scale, x, y);
 			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 				player_data(data, x, y);
@@ -303,7 +303,7 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
-	circle(data, data->player.x, data->player.y, 4, 0xff0000);
+	circle(data, data->player.x, data->player.y, data->scale / 10, 0xff0000);
 	// line(data, data->player.x, data->player.y, data->player.rot_angle);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);

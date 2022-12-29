@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/28 18:57:44 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:40:21 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,15 @@ typedef struct s_data
     void *win;
     int Columns;
     int Rows;
-    int x;
-    int y;
-    int i;
-    int j;
-    int xp;
-    int yp;
-    int ap;
-    int bp;
+	int	width;
+	int	height;
+	int	scale;
     int w_pressed;
     int a_pressed;
     int s_pressed;
     int d_pressed;
     int ri_pressed;
     int le_pressed;
-    int playerY;
-    char **splitted_array;
 	t_player	player;
 	t_rays	rays;
     t_image img;

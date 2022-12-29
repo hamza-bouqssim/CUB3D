@@ -2,5 +2,6 @@
 *.xpm
 *.o
 *.wav
+*.txt
 cub3D
 build
