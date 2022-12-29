@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/29 15:48:41 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:29:18 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	int		fd;
-	char	*ret;
 	
 	if (ac == 2)
 	{
@@ -50,7 +49,7 @@ int	main(int ac, char **av)
 			return (0);
 		}
 		init_data(&data);
-		draw_map(&data);
+		draw_minimap(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);
 		mlx_hook(data.win, 3, 0, ft_released, &data);

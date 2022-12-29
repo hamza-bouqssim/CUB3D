@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	ft_pressed(int key, t_data *data)
 {
@@ -41,18 +41,14 @@ int	ft_released(int key, t_data *data)
 
 int	ft_moves(t_data *data)
 {
-	double	move;
-	double	x_wall;
-	double	y_wall;
-
 	if (data->w_pressed)
-		w_move(data, move, x_wall, y_wall);
+		w_move(data);
 	if (data->s_pressed)
-		s_move(data, move, x_wall, y_wall);
+		s_move(data);
 	if (data->d_pressed)
-		d_move(data, move, x_wall, y_wall);
+		d_move(data);
 	if (data->a_pressed)
-		a_move(data, move, x_wall, y_wall);
+		a_move(data);
 	if (data->ri_pressed)
 	{
 		data->player.turn = 1;
@@ -64,7 +60,7 @@ int	ft_moves(t_data *data)
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
-	draw_map(data);
+	draw_minimap(data);
 	return (0);
 }
 

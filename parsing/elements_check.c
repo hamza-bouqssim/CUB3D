@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/25 18:55:26 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:19:03 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,9 @@ int	check_elements(t_data *data)
 	while (data->elements[i])
 	{
 		spl = ft_split(data->elements[i], ' ');
-		if (!checker(spl))
+		if (!checker(spl) || !check_double(spl, str))
 		{
 			ft_free (spl);
-			return (0);
-		}
-		else if (!check_double(spl, str))
-		{
 			ft_free (str);
 			return (0);
 		}

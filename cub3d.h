@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/29 15:40:21 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:33:39 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ typedef struct s_rays
 	double	view_angle;
 	double	num_rays;
 	double	ray_angle;
+	double	xintercept;
+	double	yintercept;
+	double	xstep;
+	double	ystep;
 	double	h_wall_x;
 	double	h_wall_y;
 	double	v_wall_x;
@@ -124,17 +128,21 @@ int		map_check(t_data *data);
 int     close_win(void *param);
 void	image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    draw(t_data *data, int color, int scale, double x, double y);
-void    draw_map(t_data *data);
+void    draw(t_data *data, int color, double x, double y);
+void    draw_minimap(t_data *data);
 int     ft_keys(t_data *data);
 int     ft_moves(t_data *data);
 int		ft_pressed(int key, t_data *data);
 int		ft_released(int key, t_data *data);
-void	w_move(t_data *data, double move, double x_wall, double y_wall);
-void	s_move(t_data *data, double move, double x_wall, double y_wall);
-void	d_move(t_data *data, double move, double x_wall, double y_wall);
-void	a_move(t_data *data, double move, double x_wall, double y_wall);
+void	w_move(t_data *data);
+void	s_move(t_data *data);
+void	d_move(t_data *data);
+void	a_move(t_data *data);
 int		wall_check(t_data *data, double y, double x);
+void	draw_rays(t_data *data);
+void	horizontal_init(t_data *data, int column);
+void	vertical_init(t_data *data, int column);
+double	distance_points(double x1, double y1, double x2, double y2);
 //________________________
 
 #endif

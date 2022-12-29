@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	wall_check(t_data *data, double y, double x)
 {
@@ -6,13 +6,18 @@ int	wall_check(t_data *data, double y, double x)
 		return (1);
 	x = floor(x / data->scale);
 	y = floor(y / data->scale);
-	if (((int)x < data->Columns && (int)y < data->Rows) && data->map[(int)y][(int)x] == '1')
+	if (((int)x < data->Columns && (int)y < data->Rows)
+		&& data->map[(int)y][(int)x] == '1')
 		return (1);
 	return (0);
 }
 
-void	w_move(t_data *data, double move, double x_wall, double y_wall)
+void	w_move(t_data *data)
 {
+	double	move;
+	double	x_wall;
+	double	y_wall;
+
 	data->player.direction = 1;
 	move = data->player.direction * data->player.move_speed;
 	x_wall = data->player.x + cos(data->player.rot_angle) * move;
@@ -23,8 +28,12 @@ void	w_move(t_data *data, double move, double x_wall, double y_wall)
 	data->player.y = y_wall;
 }
 
-void	s_move(t_data *data, double move, double x_wall, double y_wall)
+void	s_move(t_data *data)
 {
+	double	move;
+	double	x_wall;
+	double	y_wall;
+
 	data->player.direction = -1;
 	move = data->player.direction * data->player.move_speed;
 	x_wall = data->player.x + cos(data->player.rot_angle) * move;
@@ -35,8 +44,12 @@ void	s_move(t_data *data, double move, double x_wall, double y_wall)
 	data->player.y = y_wall;
 }
 
-void	d_move(t_data *data, double move, double x_wall, double y_wall)
+void	d_move(t_data *data)
 {
+	double	move;
+	double	x_wall;
+	double	y_wall;
+
 	data->player.direction = 1;
 	move = data->player.direction * data->player.move_speed;
 	x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;
@@ -47,8 +60,12 @@ void	d_move(t_data *data, double move, double x_wall, double y_wall)
 	data->player.y = y_wall;
 }
 
-void	a_move(t_data *data, double move, double x_wall, double y_wall)
+void	a_move(t_data *data)
 {
+	double	move;
+	double	x_wall;
+	double	y_wall;
+
 	data->player.direction = -1;
 	move = data->player.direction * data->player.move_speed;
 	x_wall = data->player.x + cos(data->player.rot_angle + (M_PI / 2)) * move;

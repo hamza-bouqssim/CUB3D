@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/26 20:14:15 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:26:34 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ static int	check_wall(t_data *data)
 	return (1);
 }
 
+int	map_char_check(char c)
+{
+	if (c != ' ' && c != '0'
+		&& c != '1' && c != 'N'
+		&& c != 'S' && c != 'E'
+		&& c != 'W')
+		return (0);
+	return (1);
+}
+
 int	map_check(t_data *data)
 {
 	int	i;
@@ -71,10 +81,7 @@ int	map_check(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] != ' ' && data->map[i][j] != '0'
-				&& data->map[i][j] != '1' && data->map[i][j] != 'N'
-				&& data->map[i][j] != 'S' && data->map[i][j] != 'E'
-				&& data->map[i][j] != 'W')
+			if (!map_char_check(data->map[i][j]))
 				return (0);
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')

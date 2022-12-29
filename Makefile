@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/29 15:40:06 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/29 20:29:00 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,19 @@ SRC = main.c \
 	parsing/map_check.c \
 	tools/get_next_line.c \
 	tools/get_next_line_utils.c \
-	utils.c \
-	drawing_functions.c \
-	key_hooks.c \
-	moves.c
+	minimap/draw_rays.c \
+	minimap/horizontal_check.c \
+	minimap/vertical_check.c \
+	minimap/drawing_functions.c \
+	movements/key_hooks.c \
+	movements/moves.c \
+	utils.c
 
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
-%.o: %.c cub3d.h ../get_next_line.h
+%.o: %.c cub3d.h
 	$(GCC) -c $< -o $@ -g
 
 $(NAME): $(OBJ) 
