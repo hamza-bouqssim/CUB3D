@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/29 20:29:00 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/29 23:32:17 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = main.c \
 	minimap/drawing_functions.c \
 	movements/key_hooks.c \
 	movements/moves.c \
+	3d_draw.c \
 	utils.c
 
 OBJ = ${SRC:.c=.o}

@@ -75,7 +75,7 @@ void	player_data(t_data *data, int x, int y)
 	data->player.x = x * data->scale + (data->scale / 2);
 	data->player.y = y * data->scale + (data->scale / 2);
 	data->player.rot_speed = (M_PI / 180);
-	data->player.move_speed = 1.0;
+	data->player.move_speed = 0.5;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
 	else if (data->map[y][x] == 'S')

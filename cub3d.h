@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/29 20:33:39 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:30:15 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void	draw_rays(t_data *data);
 void	horizontal_init(t_data *data, int column);
 void	vertical_init(t_data *data, int column);
 double	distance_points(double x1, double y1, double x2, double y2);
+void projection(t_data *data, int i , int color);
 //________________________
 
 #endif

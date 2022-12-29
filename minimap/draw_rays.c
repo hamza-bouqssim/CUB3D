@@ -27,26 +27,28 @@ static void	ray_line(t_data *data, double x1, double y1)
 	}
 }
 
-static void	get_distance(t_data *data)
+static void	get_distance(t_data *data, int i)
 {
 	if (data->rays.h_distance < data->rays.v_distance)
 	{
 		data->rays.wall_x = data->rays.h_wall_x;
 		data->rays.wall_y = data->rays.h_wall_y;
 		data->rays.distance = data->rays.h_distance;
+		projection(data, i, 0xD5CEA3);
 	}
 	else
 	{
 		data->rays.wall_x = data->rays.v_wall_x;
 		data->rays.wall_y = data->rays.v_wall_y;
 		data->rays.distance = data->rays.v_distance;
+		projection(data, i, 0xC69749);
 	}
 }
 
 static void	init_rays(t_data *data)
 {
 	data->rays.view_angle = 60 * (M_PI / 180);
-	data->rays.num_rays = data->width;
+	data->rays.num_rays = WIDTH;
 	data->rays.ray_angle = data->player.rot_angle - (data->rays.view_angle / 2);
 	data->rays.ray_angle = fmod(data->rays.ray_angle, 2 * M_PI);
 	if (data->rays.ray_angle < 0)
@@ -82,7 +84,7 @@ void	draw_rays(t_data *data)
 			data->rays.ray_angle = (2 * M_PI) + data->rays.ray_angle;
 		horizontal_init(data, i);
 		vertical_init(data, i);
-		get_distance(data);
+		get_distance(data, i);
 		ray_line(data, data->rays.wall_x, data->rays.wall_y);
 		data->rays.ray_angle += data->rays.view_angle / data->rays.num_rays;
 		i++;
