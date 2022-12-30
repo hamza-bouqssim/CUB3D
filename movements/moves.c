@@ -2,7 +2,7 @@
 
 int	wall_check(t_data *data, double y, double x)
 {
-	if (x < 0 || x > data->width || y < 0 || y > data->height)
+	if (x < 0 || x > 49 * data->scale || y < 0 || y > 45 * data->scale)
 		return (1);
 	x = floor(x / data->scale);
 	y = floor(y / data->scale);

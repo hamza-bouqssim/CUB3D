@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/30 19:12:08 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/31 00:50:44 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_data
 	char	**spl;
 	char	**elements;
 	char	**map;
+	char	**f_rgb;
+	char	**c_rgb;
 }   t_data;
 
 //________________________

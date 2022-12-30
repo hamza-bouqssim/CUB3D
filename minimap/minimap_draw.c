@@ -82,14 +82,14 @@ void	minimap_draw(t_data *data)
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == '1')
-				draw(data, 0x0000fff, x, y);
-			else if (data->map[y][x] == '0')
-				draw(data, 0xfffffff, x, y);
+				draw(data, 0x0000ff, x, y);
+			// else if (data->map[y][x] == '0')
+			// 	draw(data, 0xffffff, x, y);
 			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 			{
 				data->map[y][x] = '0';
-				draw(data, 0xfffffff, x, y);
+				// draw(data, 0xffffff, x, y);
 			}
 			x++;
 		}

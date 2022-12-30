@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/29 20:26:34 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:36:16 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int	checker(t_data *data, int i, int j, int last)
 	else if ((data->map[i][j + 1] == ' ' || !data->map[i][j + 1])
 		&& data->map[i][j] != '1' && data->map[i][j] != ' ')
 		return (0);
-	else if (((i < last && data->map[i + 1][j] == ' ')
-		|| (i > 0 && data->map[i - 1][j] == ' '))
+	else if ((((i < last && (data->map[i + 1][j] == ' ' || !data->map[i + 1][j]))
+		|| (i > 0 && (data->map[i - 1][j] == ' ' || !data->map[i - 1][j]))))
 			&& data->map[i][j] != '1' && data->map[i][j] != ' ')
 		return (0);
 	return (1);

@@ -11,13 +11,13 @@ static void	distance_init(t_data *data, int found_wall)
 
 static void	vertical_check(t_data *data, double next_x, double next_y)
 {
-	int		found_wall;
+	int	found_wall;
 
 	found_wall = 0;
 	next_x = data->rays.xintercept;
 	next_y = data->rays.yintercept;
-	while (next_x >= 0 && next_x <= data->width
-		&& next_y >= 0 && next_y <= data->height)
+	while (next_x >= 0 && next_x <= 49 * data->scale
+		&& next_y >= 0 && next_y <= 45 * data->scale)
 	{
 		if (wall_check(data, next_y, next_x - (!data->rays.is_right)))
 		{
