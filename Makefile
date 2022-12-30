@@ -6,13 +6,14 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2022/12/29 23:32:17 by sismaili         ###   ########.fr        #
+#    Updated: 2022/12/30 18:42:58 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 GCC = gcc -Wall -Wextra -Werror -Ofast
 SRC = main.c \
+	all_draw.c \
 	tools/ft_strlen.c \
 	tools/ft_split.c \
 	tools/ft_strdup.c \
@@ -29,10 +30,11 @@ SRC = main.c \
 	minimap/draw_rays.c \
 	minimap/horizontal_check.c \
 	minimap/vertical_check.c \
-	minimap/drawing_functions.c \
+	minimap/minimap_draw.c \
 	movements/key_hooks.c \
 	movements/moves.c \
-	3d_draw.c \
+	3d_draw/3d_draw.c \
+	3d_draw/projection.c \
 	utils.c
 
 OBJ = ${SRC:.c=.o}

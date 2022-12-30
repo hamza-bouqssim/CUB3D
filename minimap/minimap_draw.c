@@ -70,31 +70,12 @@ void	circle(t_data *data, double x, double y, int r)
 	}
 }
 
-void	player_data(t_data *data, int x, int y)
-{
-	data->player.x = x * data->scale + (data->scale / 2);
-	data->player.y = y * data->scale + (data->scale / 2);
-	data->player.rot_speed = (M_PI / 180);
-	data->player.move_speed = 0.5;
-	if (data->map[y][x] == 'N')
-		data->player.rot_angle = 3 * M_PI / 2;
-	else if (data->map[y][x] == 'S')
-		data->player.rot_angle = M_PI / 2;
-	else if (data->map[y][x] == 'E')
-		data->player.rot_angle = 0;
-	else if (data->map[y][x] == 'W')
-		data->player.rot_angle = M_PI;
-	data->map[y][x] = '0';
-	draw(data, 0xfffffff, x, y);
-}
-
-void	draw_minimap(t_data *data)
+void	minimap_draw(t_data *data)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	image(data);
 	while (data->map[y])
 	{
 		x = 0;
@@ -106,12 +87,14 @@ void	draw_minimap(t_data *data)
 				draw(data, 0xfffffff, x, y);
 			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
-				player_data(data, x, y);
+			{
+				data->map[y][x] = '0';
+				draw(data, 0xfffffff, x, y);
+			}
 			x++;
 		}
 		y++;
 	}
 	circle(data, data->player.x, data->player.y, data->scale / 10);
 	draw_rays(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }

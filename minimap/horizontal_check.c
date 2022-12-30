@@ -14,12 +14,10 @@ static void	horizontal_check(t_data *data, double next_x, double next_y)
 	int		found_wall;
 
 	found_wall = 0;
-	if (!data->rays.is_down)
-		next_y--;
-	while (next_x >= 0 && next_x <= data->Columns * data->scale
-		&& next_y >= 0 && next_y <= data->Rows * data->scale)
+	while (next_x >= 0 && next_x <= data->width
+		&& next_y >= 0 && next_y <= data->height)
 	{
-		if (wall_check(data, next_y, next_x))
+		if (wall_check(data, next_y - (!data->rays.is_down), next_x))
 		{
 			found_wall = 1;
 			data->rays.h_wall_x = next_x;

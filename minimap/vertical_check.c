@@ -16,12 +16,10 @@ static void	vertical_check(t_data *data, double next_x, double next_y)
 	found_wall = 0;
 	next_x = data->rays.xintercept;
 	next_y = data->rays.yintercept;
-	if (!data->rays.is_right)
-		next_x--;
-	while (next_x >= 0 && next_x <= data->Columns * data->scale
-		&& next_y >= 0 && next_y <= data->Rows * data->scale)
+	while (next_x >= 0 && next_x <= data->width
+		&& next_y >= 0 && next_y <= data->height)
 	{
-		if (wall_check(data, next_y, next_x))
+		if (wall_check(data, next_y, next_x - (!data->rays.is_right)))
 		{
 			found_wall = 1;
 			data->rays.v_wall_x = next_x;

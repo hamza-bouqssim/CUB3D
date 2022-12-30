@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:21:02 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/21 20:47:30 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:11:37 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int ft_countRows(char **str)
+int	ft_count_rows(char **str)
 {
 	int	i;
 
@@ -33,4 +33,3 @@ int ft_countRows(char **str)
 		i++;
 	return (i);
 }
-

@@ -60,7 +60,7 @@ int	ft_moves(t_data *data)
 		data->player.rot_angle += data->player.turn * data->player.rot_speed;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
-	draw_minimap(data);
+	all_draw(data);
 	return (0);
 }
 

@@ -1,33 +1,6 @@
 #include "../cub3d.h"
 
-double	distance_points(double x1, double y1, double x2, double y2)
-{
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
-
-static void	ray_line(t_data *data, double x1, double y1)
-{
-	double	x;
-	double	y;
-	double	x_inc;
-	double	y_inc;
-	int		steps;
-
-	x = data->player.x;
-	y = data->player.y;
-	steps = fmax(fabs(x1 - x), fabs(y1 - y));
-	x_inc = (x1 - x) / (double)steps;
-	y_inc = (y1 - y) / (double)steps;
-	while (steps > 0)
-	{
-		my_mlx_pixel_put(data, x, y, 0xFFA500);
-		x += x_inc;
-		y += y_inc;
-		steps--;
-	}
-}
-
-static void	get_distance(t_data *data)
+static void	get_distance(t_data *data, int i)
 {
 	if (data->rays.h_distance < data->rays.v_distance)
 	{
@@ -35,6 +8,7 @@ static void	get_distance(t_data *data)
 		data->rays.wall_y = data->rays.h_wall_y;
 		data->rays.distance = data->rays.h_distance
 			* cos(data->player.rot_angle - data->rays.ray_angle);
+		projection(data, i, 0xD5CEA3);
 	}
 	else
 	{
@@ -42,10 +16,11 @@ static void	get_distance(t_data *data)
 		data->rays.wall_y = data->rays.v_wall_y;
 		data->rays.distance = data->rays.v_distance
 			* cos(data->player.rot_angle - data->rays.ray_angle);
+		projection(data, i, 0xC69749);
 	}
 }
 
-void	draw_rays(t_data *data)
+void	wall_project(t_data *data)
 {
 	int	i;
 
@@ -65,8 +40,7 @@ void	draw_rays(t_data *data)
 			data->rays.ray_angle = (2 * M_PI) + data->rays.ray_angle;
 		horizontal_init(data, i);
 		vertical_init(data, i);
-		get_distance(data);
-		ray_line(data, data->rays.wall_x, data->rays.wall_y);
+		get_distance(data, i);
 		data->rays.ray_angle += data->rays.view_angle / data->rays.num_rays;
 		i++;
 	}

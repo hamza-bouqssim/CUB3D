@@ -6,18 +6,18 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:02:35 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/20 19:03:24 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:10:52 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    ft_free(char **spl)
+void	ft_free(char **spl)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (spl[i])
-        free (spl[i++]);
-    free (spl);
+	i = 0;
+	while (spl[i])
+		free (spl[i++]);
+	free (spl);
 }

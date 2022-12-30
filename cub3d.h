@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/29 23:30:15 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:12:08 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup( char *s1);
 char	**ft_split(char const *s, char c);
-int 	ft_countRows(char **str);
+int 	ft_count_rows(char **str);
 void	fill_spl(t_data *data, int fd);
 int		ft_isspace(int c);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -129,7 +129,7 @@ int     close_win(void *param);
 void	image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    draw(t_data *data, int color, double x, double y);
-void    draw_minimap(t_data *data);
+void    minimap_draw(t_data *data);
 int     ft_keys(t_data *data);
 int     ft_moves(t_data *data);
 int		ft_pressed(int key, t_data *data);
@@ -143,7 +143,10 @@ void	draw_rays(t_data *data);
 void	horizontal_init(t_data *data, int column);
 void	vertical_init(t_data *data, int column);
 double	distance_points(double x1, double y1, double x2, double y2);
-void projection(t_data *data, int i , int color);
+void	projection(t_data *data, int i , int color);
+void	wall_project(t_data *data);
+void	all_draw(t_data *data);
+void	init_rays(t_data *data);
 //________________________
 
 #endif
