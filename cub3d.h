@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/31 00:50:44 by sismaili         ###   ########.fr       */
+/*   Updated: 2022/12/31 14:53:06 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <limits.h>
 
 # define BUFFER_SIZE 1
-# define HEIGHT 1000
-# define WIDTH 1000
+# define HEIGHT 1300
+# define WIDTH 1300
 
 //keys
 # define UP 126
@@ -119,6 +119,7 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strdup( char *s1);
 char	**ft_split(char const *s, char c);
 int 	ft_count_rows(char **str);
+int		ft_count_columns(char **str);
 void	fill_spl(t_data *data, int fd);
 int		ft_isspace(int c);
 int		ft_strcmp(const char *s1, const char *s2);
