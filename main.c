@@ -6,7 +6,7 @@
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/01 21:26:07 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2023/01/02 00:43:02 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,17 @@ int mouse_move(int x, int y, void *param)
     t_data *data;
 	data = param;
 	(void)y;
-	static int last = WIDTH / 2;
-    if (x < last)
+	// int value = 1;
+	// static int last = WIDTH / 2;
+    if (x < WIDTH / 2)
         data->player.rot_angle = fmod(data->player.rot_angle - 0.05 + 2 * M_PI, 2 * M_PI);
-    else if (x >= last)
+    else if (x >= WIDTH / 2)
         data->player.rot_angle = fmod(data->player.rot_angle + 0.05, 2 * M_PI);
 	all_draw(data);
-	last = x;
+	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
+	mlx_mouse_hide();
+	
+	// last = x;
     return 0;
 }
 
