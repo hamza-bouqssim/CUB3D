@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/31 18:11:37 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/01 21:26:07 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ void	search_player(t_data *data)
 	}
 }
 
+int mouse_move(int x, int y, void *param)
+{
+    t_data *data;
+	data = param;
+	(void)y;
+	static int last = WIDTH / 2;
+    if (x < last)
+        data->player.rot_angle = fmod(data->player.rot_angle - 0.05 + 2 * M_PI, 2 * M_PI);
+    else if (x >= last)
+        data->player.rot_angle = fmod(data->player.rot_angle + 0.05, 2 * M_PI);
+	all_draw(data);
+	last = x;
+    return 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -90,6 +105,7 @@ int	main(int ac, char **av)
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);
 		mlx_hook(data.win, 3, 0, ft_released, &data);
+		mlx_hook(data.win, 6, 0, mouse_move, &data);
 		mlx_loop_hook(data.mlx, ft_keys, &data);
 		mlx_loop(data.mlx);
 	}
