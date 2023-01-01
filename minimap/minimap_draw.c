@@ -36,8 +36,8 @@ void	line(t_data *data, double x1, double y1, double angle)
 
 	x = data->player.x;
 	y = data->player.y;
-	x1 = x1 + cos(angle) * 30;
-	y1 = y1 + sin(angle) * 30;
+	x1 = x1 + cos(angle) * data->scale;
+	y1 = y1 + sin(angle) * data->scale;
 	steps = fmax(fabs(x1 - x), fabs(y1 - y));
 	x_inc = (x1 - x) / (double)steps;
 	y_inc = (y1 - y) / (double)steps;
@@ -96,5 +96,6 @@ void	minimap_draw(t_data *data)
 		y++;
 	}
 	circle(data, data->player.x, data->player.y, data->scale / 10);
-	draw_rays(data);
+	line(data, data->player.x, data->player.y, data->player.rot_angle);
+	// draw_rays(data);
 }

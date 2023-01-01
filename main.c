@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/31 18:11:37 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/01 23:35:48 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_player_data(t_data *data, int x, int y)
 {
 	data->player.x = x * data->scale + (data->scale / 2);
 	data->player.y = y * data->scale + (data->scale / 2);
-	data->player.rot_speed = 0.8 * (M_PI / 180);
+	data->player.rot_speed = 1.5 * (M_PI / 180);
 	data->player.move_speed = 0.4;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
@@ -65,6 +65,30 @@ void	search_player(t_data *data)
 	}
 }
 
+int mouse_move(int x, int y, void *param)
+{
+    t_data *data;
+	data = param;
+	(void)y;
+	static int last = WIDTH / 2;
+	if (x > 0 && x < WIDTH)
+	{
+		if (x < last)
+		{
+		data->player.turn = -1;
+		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+		}
+		else if (x >= last)
+		{
+		data->player.turn = 1;
+		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+		}
+		all_draw(data);
+		last = x;
+	}
+    return 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -90,6 +114,7 @@ int	main(int ac, char **av)
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);
 		mlx_hook(data.win, 3, 0, ft_released, &data);
+		mlx_hook(data.win, 6, 0, mouse_move, &data);
 		mlx_loop_hook(data.mlx, ft_keys, &data);
 		mlx_loop(data.mlx);
 	}

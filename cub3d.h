@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/31 14:53:06 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/01 23:29:35 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,28 @@ typedef struct s_rays
 	int		is_right;
 }	t_rays;
 
+typedef	struct	s_texture
+{
+	void			*no_img;
+	unsigned int	*no_addr;
+	int				no_width;
+	int				no_height;
+	void			*so_img;
+	unsigned int	*so_addr;
+	int				so_width;
+	int				so_height;
+	void			*we_img;
+	unsigned int	*we_addr;
+	int				we_width;
+	int				we_height;
+	void			*ea_img;
+	unsigned int	*ea_addr;
+	int				ea_width;
+	int				ea_height;
+	double			of_x;
+	double			of_y;
+}	t_texture;
+
 typedef struct s_data
 {
     void *mlx;
@@ -101,12 +123,14 @@ typedef struct s_data
 	t_player	player;
 	t_rays	rays;
     t_image img;
+	t_texture	texture;
 	char	*line;
 	char	**spl;
 	char	**elements;
 	char	**map;
 	char	**f_rgb;
 	char	**c_rgb;
+	char	**path;
 }   t_data;
 
 //________________________
@@ -131,6 +155,7 @@ int		map_check(t_data *data);
 int     close_win(void *param);
 void	image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put2(t_data *data, int x, int y, int color);
 void    draw(t_data *data, int color, double x, double y);
 void    minimap_draw(t_data *data);
 int     ft_keys(t_data *data);
@@ -150,6 +175,8 @@ void	projection(t_data *data, int i , int color);
 void	wall_project(t_data *data);
 void	all_draw(t_data *data);
 void	init_rays(t_data *data);
+void	get_add_image(t_data *data);
+void	texture_draw(t_data *data);
 //________________________
 
 #endif
