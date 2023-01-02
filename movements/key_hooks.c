@@ -19,6 +19,10 @@ int	ft_pressed(int key, t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit (1);
 	}
+	if( key == MINES)
+		mlx_mouse_hide();
+	if(key == PLUS)
+		mlx_mouse_show();
 	return (0);
 }
 
