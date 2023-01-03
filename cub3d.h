@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/01 23:29:35 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:11:51 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_player
 {
     double	x;
     double	y;
+    double	x1;
+    double	y1;
 	double	rot_angle;
 	double	rot_speed;
 	double	move_speed;
@@ -85,6 +87,10 @@ typedef struct s_rays
 
 typedef	struct	s_texture
 {
+	t_image			no;
+	t_image			so;
+	t_image			we;
+	t_image			ea;
 	void			*no_img;
 	unsigned int	*no_addr;
 	int				no_width;
@@ -101,8 +107,8 @@ typedef	struct	s_texture
 	unsigned int	*ea_addr;
 	int				ea_width;
 	int				ea_height;
-	double			of_x;
-	double			of_y;
+	int			of_x;
+	int			of_y;
 }	t_texture;
 
 typedef struct s_data
@@ -114,6 +120,7 @@ typedef struct s_data
 	int	width;
 	int	height;
 	int	scale;
+	int	scale_3d;
     int w_pressed;
     int a_pressed;
     int s_pressed;
@@ -171,12 +178,12 @@ void	draw_rays(t_data *data);
 void	horizontal_init(t_data *data, int column);
 void	vertical_init(t_data *data, int column);
 double	distance_points(double x1, double y1, double x2, double y2);
-void	projection(t_data *data, int i , int color);
+void	projection(t_data *data, int i , unsigned int *addr);
 void	wall_project(t_data *data);
 void	all_draw(t_data *data);
 void	init_rays(t_data *data);
 void	get_add_image(t_data *data);
-void	texture_draw(t_data *data);
+// void	texture_draw(t_data *data);
 //________________________
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/01 23:35:48 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:45:19 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	init_data(t_data *data)
 	data->Columns = ft_count_columns(data->map);
 	data->Rows = ft_count_rows(data->map);
 	data->scale = 12;
-	data->width = data->Columns * data->scale;
-	data->height = data->Rows * data->scale;
+	data->scale_3d = 64;
+	data->width = data->Columns * data->scale_3d;
+	data->height = data->Rows * data->scale_3d;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
 	data->w_pressed = 0;
@@ -31,10 +32,12 @@ void	init_data(t_data *data)
 
 void	init_player_data(t_data *data, int x, int y)
 {
-	data->player.x = x * data->scale + (data->scale / 2);
-	data->player.y = y * data->scale + (data->scale / 2);
+	data->player.x = x * data->scale_3d + (data->scale_3d / 2);
+	data->player.y = y * data->scale_3d + (data->scale_3d / 2);
+	data->player.x1 = x * data->scale + (data->scale / 2);
+	data->player.y1 = y * data->scale + (data->scale / 2);
 	data->player.rot_speed = 1.5 * (M_PI / 180);
-	data->player.move_speed = 0.4;
+	data->player.move_speed = 2.5;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
 	else if (data->map[y][x] == 'S')
@@ -75,13 +78,13 @@ int mouse_move(int x, int y, void *param)
 	{
 		if (x < last)
 		{
-		data->player.turn = -1;
-		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+			data->player.turn = -1;
+			data->player.rot_angle += data->player.turn * data->player.rot_speed;
 		}
 		else if (x >= last)
 		{
-		data->player.turn = 1;
-		data->player.rot_angle += data->player.turn * data->player.rot_speed;
+			data->player.turn = 1;
+			data->player.rot_angle += data->player.turn * data->player.rot_speed;
 		}
 		all_draw(data);
 		last = x;
@@ -110,6 +113,7 @@ int	main(int ac, char **av)
 		}
 		init_data(&data);
 		search_player(&data);
+		get_add_image(&data);
 		all_draw(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);

@@ -34,8 +34,8 @@ void	line(t_data *data, double x1, double y1, double angle)
 	double	y_inc;
 	int		steps;
 
-	x = data->player.x;
-	y = data->player.y;
+	x = x1;
+	y = y1;
 	x1 = x1 + cos(angle) * data->scale;
 	y1 = y1 + sin(angle) * data->scale;
 	steps = fmax(fabs(x1 - x), fabs(y1 - y));
@@ -83,19 +83,14 @@ void	minimap_draw(t_data *data)
 		{
 			if (data->map[y][x] == '1')
 				draw(data, 0x0000ff, x, y);
-			// else if (data->map[y][x] == '0')
-			// 	draw(data, 0xffffff, x, y);
 			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
-			{
 				data->map[y][x] = '0';
-				// draw(data, 0xffffff, x, y);
-			}
 			x++;
 		}
 		y++;
 	}
-	circle(data, data->player.x, data->player.y, data->scale / 10);
-	line(data, data->player.x, data->player.y, data->player.rot_angle);
+	circle(data, data->player.x1, data->player.y1, data->scale / 5);
+	line(data, data->player.x1, data->player.y1, data->player.rot_angle);
 	// draw_rays(data);
 }

@@ -45,15 +45,15 @@ void	vertical_init(t_data *data, int column)
 	data->rays.v_wall_y = 0;
 	next_x = 0;
 	next_y = 0;
-	data->rays.xintercept = floor(data->player.x / data->scale) * data->scale;
+	data->rays.xintercept = floor(data->player.x / data->scale_3d) * data->scale_3d;
 	if (data->rays.is_right)
-		data->rays.xintercept += data->scale;
+		data->rays.xintercept += data->scale_3d;
 	data->rays.yintercept = data->player.y
 		+ (data->rays.xintercept - data->player.x) * tan(data->rays.ray_angle);
-	data->rays.xstep = data->scale;
+	data->rays.xstep = data->scale_3d;
 	if (!data->rays.is_right)
 		data->rays.xstep *= -1;
-	data->rays.ystep = data->scale * tan(data->rays.ray_angle);
+	data->rays.ystep = data->scale_3d * tan(data->rays.ray_angle);
 	if (!data->rays.is_down && data->rays.ystep > 0)
 		data->rays.ystep *= -1;
 	else if (data->rays.is_down && data->rays.ystep < 0)
