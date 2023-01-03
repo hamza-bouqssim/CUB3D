@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/03 01:24:38 by sismaili         ###   ########.fr        #
+#    Updated: 2023/01/03 01:26:38 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC = main.c \
 	movements/moves.c \
 	3d_draw/3d_draw.c \
 	3d_draw/projection.c \
-	utils.c
+	utils.c \
+	texture.c
 
 OBJ = ${SRC:.c=.o}
 

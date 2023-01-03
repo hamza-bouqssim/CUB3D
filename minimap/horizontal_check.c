@@ -41,15 +41,15 @@ void	horizontal_init(t_data *data, int column)
 	(void)column;
 	data->rays.h_wall_x = 0;
 	data->rays.h_wall_y = 0;
-	data->rays.yintercept = floor(data->player.y / data->scale) * data->scale;
+	data->rays.yintercept = floor(data->player.y / data->scale_3d) * data->scale_3d;
 	if (data->rays.is_down)
-		data->rays.yintercept += data->scale;
+		data->rays.yintercept += data->scale_3d;
 	data->rays.xintercept = data->player.x
 		+ (data->rays.yintercept - data->player.y) / tan(data->rays.ray_angle);
-	data->rays.ystep = data->scale;
+	data->rays.ystep = data->scale_3d;
 	if (!data->rays.is_down)
 		data->rays.ystep *= -1;
-	data->rays.xstep = data->scale / tan(data->rays.ray_angle);
+	data->rays.xstep = data->scale_3d / tan(data->rays.ray_angle);
 	if (!data->rays.is_right && data->rays.xstep > 0)
 		data->rays.xstep *= -1;
 	else if (data->rays.is_right && data->rays.xstep < 0)

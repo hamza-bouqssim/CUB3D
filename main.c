@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/02 00:43:02 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2023/01/03 01:29:35 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	init_data(t_data *data)
 	data->Columns = ft_count_columns(data->map);
 	data->Rows = ft_count_rows(data->map);
 	data->scale = 12;
-	data->width = data->Columns * data->scale;
-	data->height = data->Rows * data->scale;
+	data->scale_3d = 64;
+	data->width = data->Columns * data->scale_3d;
+	data->height = data->Rows * data->scale_3d;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
 	data->w_pressed = 0;
@@ -31,10 +32,12 @@ void	init_data(t_data *data)
 
 void	init_player_data(t_data *data, int x, int y)
 {
-	data->player.x = x * data->scale + (data->scale / 2);
-	data->player.y = y * data->scale + (data->scale / 2);
-	data->player.rot_speed = 0.8 * (M_PI / 180);
-	data->player.move_speed = 0.4;
+	data->player.x = x * data->scale_3d + (data->scale_3d / 2);
+	data->player.y = y * data->scale_3d + (data->scale_3d / 2);
+	data->player.x1 = x * data->scale + (data->scale / 2);
+	data->player.y1 = y * data->scale + (data->scale / 2);
+	data->player.rot_speed = 1.5 * (M_PI / 180);
+	data->player.move_speed = 2.5;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
 	else if (data->map[y][x] == 'S')
@@ -70,8 +73,6 @@ int mouse_move(int x, int y, void *param)
     t_data *data;
 	data = param;
 	(void)y;
-	// int value = 1;
-	// static int last = WIDTH / 2;
     if (x < WIDTH / 2)
         data->player.rot_angle = fmod(data->player.rot_angle - 0.05 + 2 * M_PI, 2 * M_PI);
     else if (x >= WIDTH / 2)
@@ -79,8 +80,6 @@ int mouse_move(int x, int y, void *param)
 	all_draw(data);
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
 	mlx_mouse_hide();
-	
-	// last = x;
     return 0;
 }
 
@@ -105,6 +104,7 @@ int	main(int ac, char **av)
 		}
 		init_data(&data);
 		search_player(&data);
+		get_add_image(&data);
 		all_draw(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);

@@ -6,11 +6,24 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/30 22:10:55 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/01 19:05:58 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	get_path(t_data *data, char **spl)
+{
+	static int	i;
+
+	if (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C"))
+	{
+		data->path[i] = ft_strdup(spl[1]);
+		i++;
+		if (i == 4)
+			data->path[i] = 0;
+	}
+}
 
 static int	check_double(char **spl, char **str)
 {
@@ -102,9 +115,13 @@ int	check_elements(t_data *data)
 	str = malloc(sizeof(char *) * 7);
 	if (!data->elements || !str)
 		return (0);
+	data->path = malloc(sizeof(char *) * 5);
+	if (!data->path)
+		return (0);
 	while (data->elements[i])
 	{
 		spl = ft_split(data->elements[i], ' ');
+		get_path(data, spl);
 		if (!checker(data, spl) || !check_double(spl, str))
 		{
 			ft_free (spl);
