@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/03 00:11:51 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:17:46 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <limits.h>
 
 # define BUFFER_SIZE 1
-# define HEIGHT 1300
-# define WIDTH 1300
+# define HEIGHT 900
+# define WIDTH 900
 
 //keys
 # define UP 126
@@ -163,7 +163,6 @@ int     close_win(void *param);
 void	image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put2(t_data *data, int x, int y, int color);
-void    draw(t_data *data, int color, double x, double y);
 void    minimap_draw(t_data *data);
 int     ft_keys(t_data *data);
 int     ft_moves(t_data *data);

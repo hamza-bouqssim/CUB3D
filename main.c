@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/03 00:45:19 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:36:25 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	search_player(t_data *data)
 		{
 			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
+			{
 				init_player_data(data, x, y);
+				return ;
+			}
 			x++;
 		}
 		y++;

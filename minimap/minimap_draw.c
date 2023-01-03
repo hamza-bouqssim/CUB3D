@@ -2,10 +2,10 @@
 
 void	draw(t_data *data, int color, double x, double y)
 {
-	int	holdx;
-	int	holdy;
-	int	first;
-	int	last;
+	double	holdx;
+	double	holdy;
+	double	first;
+	double	last;
 
 	holdx = x * data->scale;
 	first = holdx;
@@ -74,23 +74,43 @@ void	minimap_draw(t_data *data)
 {
 	int	x;
 	int	y;
+	double	start_x;
+	double	start_y;
+	double	draw_x;
+	double	draw_y;
 
-	y = 0;
-	while (data->map[y])
+	start_x = data->player.x1 / data->scale;
+	start_y = data->player.y1 / data->scale;
+	start_x -= 10;
+	start_y -= 10;
+	if (start_x < 0)
+		start_x = 0;
+	if (start_y < 0)
+		start_y = 0;
+	y = start_y;
+	while (data->map[y] && y < start_y + 20)
 	{
-		x = 0;
-		while (data->map[y][x])
+		x = start_x;
+		while (data->map[y][x] && x < start_x + 20 && x < ft_strlen(data->map[y]))
 		{
+			draw_x = (x - start_x);
+			draw_y = (y - start_y);
 			if (data->map[y][x] == '1')
-				draw(data, 0x0000ff, x, y);
+				draw(data, 0x0000ff, draw_x, draw_y);
+			else if (data->map[y][x] == '0')
+				draw(data, 0xffffff, draw_x, draw_y);
 			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
 					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
+			{
+				draw(data, 0xffffff, draw_x, draw_y);
 				data->map[y][x] = '0';
+			}
 			x++;
 		}
 		y++;
 	}
-	circle(data, data->player.x1, data->player.y1, data->scale / 5);
-	line(data, data->player.x1, data->player.y1, data->player.rot_angle);
-	// draw_rays(data);
+	start_x = (data->player.x1 / data->scale - start_x) * data->scale;
+	start_y = (data->player.y1 / data->scale - start_y) * data->scale;
+	circle(data, start_x, start_y, data->scale / 5);
+	line(data, start_x, start_y, data->player.rot_angle);
 }
