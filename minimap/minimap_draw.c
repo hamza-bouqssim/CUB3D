@@ -72,8 +72,8 @@ void	circle(t_data *data, double x, double y, int r)
 
 void	minimap_draw(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	start_x;
 	double	start_y;
 	double	draw_x;
@@ -91,7 +91,8 @@ void	minimap_draw(t_data *data)
 	while (data->map[y] && y < start_y + 20)
 	{
 		x = start_x;
-		while (data->map[y][x] && x < start_x + 20 && x < ft_strlen(data->map[y]))
+		while (data->map[y][x] && x < start_x + 20
+			&& x < ft_strlen(data->map[y]))
 		{
 			draw_x = (x - start_x);
 			draw_y = (y - start_y);

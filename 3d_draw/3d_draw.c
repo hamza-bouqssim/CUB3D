@@ -8,11 +8,11 @@ static void	get_distance(t_data *data, int i)
 		data->rays.wall_y = data->rays.h_wall_y;
 		data->rays.distance = data->rays.h_distance
 			* cos(data->player.rot_angle - data->rays.ray_angle);
-		data->texture.of_x = (int)data->rays.wall_x % 64;
+		data->text.of_x = (int)data->rays.wall_x % 64;
 		if (data->rays.is_down)
-			projection(data, i, data->texture.no_addr);
+			projection(data, i, data->text.no_addr);
 		else
-			projection(data, i, data->texture.so_addr);
+			projection(data, i, data->text.so_addr);
 	}
 	else
 	{
@@ -20,11 +20,11 @@ static void	get_distance(t_data *data, int i)
 		data->rays.wall_y = data->rays.v_wall_y;
 		data->rays.distance = data->rays.v_distance
 			* cos(data->player.rot_angle - data->rays.ray_angle);
-		data->texture.of_x = (int)data->rays.wall_y % 64;
+		data->text.of_x = (int)data->rays.wall_y % 64;
 		if (data->rays.is_right)
-			projection(data, i, data->texture.we_addr);
+			projection(data, i, data->text.we_addr);
 		else
-			projection(data, i, data->texture.ea_addr);
+			projection(data, i, data->text.ea_addr);
 	}
 }
 

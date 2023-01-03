@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/03 20:27:30 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 23:19:53 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	init_data(t_data *data)
 {
-	data->Columns = ft_count_columns(data->map);
-	data->Rows = ft_count_rows(data->map);
+	data->columns = ft_count_columns(data->map);
+	data->rows = ft_count_rows(data->map);
 	data->scale = 12;
 	data->scale_3d = 64;
-	data->width = data->Columns * data->scale_3d;
-	data->height = data->Rows * data->scale_3d;
+	data->width = data->columns * data->scale_3d;
+	data->height = data->rows * data->scale_3d;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
 	data->w_pressed = 0;
@@ -60,7 +60,7 @@ void	search_player(t_data *data)
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
-					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
+				|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 			{
 				init_player_data(data, x, y);
 				return ;
@@ -71,19 +71,21 @@ void	search_player(t_data *data)
 	}
 }
 
-int mouse_move(int x, int y, void *param)
+int	mouse_move(int x, int y, void *param)
 {
-    t_data *data;
+	t_data	*data;
+
 	data = param;
 	(void)y;
-    if (x < WIDTH / 2)
-        data->player.rot_angle = fmod(data->player.rot_angle - 0.05 + 2 * M_PI, 2 * M_PI);
-    else if (x >= WIDTH / 2)
-        data->player.rot_angle = fmod(data->player.rot_angle + 0.05, 2 * M_PI);
+	if (x < WIDTH / 2)
+		data->player.rot_angle = fmod(data->player.rot_angle - 0.05 + 2 * M_PI,
+				2 * M_PI);
+	else if (x >= WIDTH / 2)
+		data->player.rot_angle = fmod(data->player.rot_angle + 0.05, 2 * M_PI);
 	all_draw(data);
-	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
+	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT);
 	mlx_mouse_hide();
-    return 0;
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -102,6 +104,7 @@ int	main(int ac, char **av)
 		fill_spl(&data, fd);
 		if (!check_elements(&data) || !map_check(&data))
 		{
+			free_all(&data);
 			write(2, "Error\nNot valid", 15);
 			return (0);
 		}
@@ -117,6 +120,10 @@ int	main(int ac, char **av)
 		mlx_loop(data.mlx);
 	}
 	else
+	{
 		write(2, "Check your arguments !\n", 23);
+		return (0);
+	}
+	free_all(&data);
 	return (0);
 }

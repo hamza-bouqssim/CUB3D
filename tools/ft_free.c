@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 19:02:35 by sismaili          #+#    #+#             */
-/*   Updated: 2022/12/30 19:10:52 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/03 20:40:18 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,20 @@ void	ft_free(char **spl)
 	while (spl[i])
 		free (spl[i++]);
 	free (spl);
+}
+
+void	free_all(t_data *data)
+{
+	if (data->spl)
+		ft_free(data->spl);
+	if (data->elements)
+		ft_free(data->elements);
+	if (data->map)
+		ft_free(data->map);
+	if (data->f_rgb)
+		ft_free(data->f_rgb);
+	if (data->c_rgb)
+		ft_free(data->c_rgb);
+	if (data->path)
+		ft_free(data->path);
 }

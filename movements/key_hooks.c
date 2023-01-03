@@ -17,11 +17,11 @@ int	ft_pressed(int key, t_data *data)
 	if (key == ESC || key == Q)
 	{
 		mlx_destroy_window(data->mlx, data->win);
-		exit (1);
+		exit(1);
 	}
-	if( key == MINES)
+	if (key == MINES)
 		mlx_mouse_hide();
-	if(key == PLUS)
+	if (key == PLUS)
 		mlx_mouse_show();
 	return (0);
 }

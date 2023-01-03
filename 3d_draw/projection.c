@@ -43,9 +43,10 @@ static void	draw_3d(t_data *data, int x, double wall_strip, unsigned int *addr)
 	draw_sky(data, x, y);
 	while (y < j + wall_strip)
 	{
-		distance_from_top = y + (wall_strip / 2) - (HEIGHT / 2)  ;
-		data->texture.of_y = distance_from_top * ((double)64 / wall_strip);
-		my_mlx_pixel_put(data, x, y, addr[(unsigned int)(data->texture.of_y * 64) + (unsigned int)data->texture.of_x]);
+		distance_from_top = y + (wall_strip / 2) - (HEIGHT / 2);
+		data->text.of_y = distance_from_top * ((double)64 / wall_strip);
+		my_mlx_pixel_put(data, x, y, addr[(unsigned int)(data->text.of_y * 64)
+			+ (unsigned int)data->text.of_x]);
 		y++;
 		if (y > HEIGHT)
 			break ;

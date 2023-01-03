@@ -1,4 +1,4 @@
-*.cub
+map*
 *.xpm
 *.o
 *.wav
