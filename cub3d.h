@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/02 00:32:43 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2023/01/03 01:24:19 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
-# include </Users/hbouqssi/Desktop/CUB3D/mlx_lib/mlx.h>
+# include "mlx_lib/mlx.h"
 # include <fcntl.h>
 # include <limits.h>
 

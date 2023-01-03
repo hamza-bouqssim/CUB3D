@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/02 00:32:19 by hbouqssi         ###   ########.fr        #
+#    Updated: 2023/01/03 01:24:38 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 GCC = gcc -Wall -Wextra -Werror -Ofast
-MLX = /Users/hbouqssi/Desktop/CUB3D/mlx_lib/libmlx.a
+MLX = mlx_lib/libmlx.a
 SRC = main.c \
 	all_draw.c \
 	tools/ft_strlen.c \
