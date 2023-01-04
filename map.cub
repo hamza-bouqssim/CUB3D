@@ -1,7 +1,7 @@
-NO ./bite_dyaf.xpm
-SO ./bite_lma.xpm
-WE ./kozina.xpm
-EA ./salon.xpm
+NO ./texture/zelija.xpm
+SO ./texture/zelija2.xpm
+WE ./texture/zelija3.xpm
+EA ./texture/zelija4.xpm
 
 F 10,38,71
 C 195,248,255

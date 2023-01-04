@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/03 23:19:53 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 01:17:55 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	init_data(t_data *data)
 	data->columns = ft_count_columns(data->map);
 	data->rows = ft_count_rows(data->map);
 	data->scale = 12;
-	data->scale_3d = 64;
-	data->width = data->columns * data->scale_3d;
-	data->height = data->rows * data->scale_3d;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
 	data->w_pressed = 0;
@@ -32,12 +29,15 @@ void	init_data(t_data *data)
 
 void	init_player_data(t_data *data, int x, int y)
 {
+	data->scale_3d = data->text.no_hei;
+	data->width = data->columns * data->scale_3d;
+	data->height = data->rows * data->scale_3d;
 	data->player.x = x * data->scale_3d + (data->scale_3d / 2);
 	data->player.y = y * data->scale_3d + (data->scale_3d / 2);
 	data->player.x1 = x * data->scale + (data->scale / 2);
 	data->player.y1 = y * data->scale + (data->scale / 2);
 	data->player.rot_speed = 1.5 * (M_PI / 180);
-	data->player.move_speed = 2.5;
+	data->player.move_speed = 50;
 	if (data->map[y][x] == 'N')
 		data->player.rot_angle = 3 * M_PI / 2;
 	else if (data->map[y][x] == 'S')
@@ -99,7 +99,7 @@ int	main(int ac, char **av)
 		if (fd < 0 || valide_path(av[1], ".cub") == 0)
 		{
 			write(2, "Wrong path\n", 11);
-			return (1);
+			return (0);
 		}
 		fill_spl(&data, fd);
 		if (!check_elements(&data) || !map_check(&data))
@@ -109,8 +109,9 @@ int	main(int ac, char **av)
 			return (0);
 		}
 		init_data(&data);
+		if (!get_add_image(&data))
+			return (0);
 		search_player(&data);
-		get_add_image(&data);
 		all_draw(&data);
 		mlx_hook(data.win, 17, 0, close_win, &data);
 		mlx_hook(data.win, 2, 0, ft_pressed, &data);
@@ -125,5 +126,5 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	free_all(&data);
-	return (0);
+	return (1);
 }
