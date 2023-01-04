@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 17:32:22 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/03 23:33:17 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 19:23:56 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check_wall(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (!checker(data, i, j, last))
+			if (!checker(data, i, j, last) || data->map[i][0] == '\n')
 				return (0);
 			j++;
 		}

@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:47:41 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 16:40:26 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:13:06 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-static char	*ft_read(int fd, char *buffer)
+char	*ft_read_buff(int fd, char *buffer)
 {
 	char	*buf;
 	int		ret;
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
-		return (NULL);
+		return (0);
 	ret = 1;
 	while (!ft_strchr(buffer, '\n') && ret)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
+		printf("%d\n", ret);
 		if (ret == -1)
 		{
 			free(buf);
@@ -35,7 +36,7 @@ static char	*ft_read(int fd, char *buffer)
 	return (buffer);
 }
 
-static char	*ft_get_line(char *buffer)
+char	*ft_line(char *buffer)
 {
 	int		i;
 	int		j;
@@ -61,7 +62,7 @@ static char	*ft_get_line(char *buffer)
 	return (line);
 }
 
-static char	*ft_get_res(char *buffer)
+char	*ft_res(char *buffer)
 {
 	char	*res;
 	int		i;
@@ -92,14 +93,14 @@ static char	*ft_get_res(char *buffer)
 char	*gnl(int fd)
 {
 	char		*line;
-	static char	*buffer;
+	static char	*buff;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	buffer = ft_read(fd, buffer);
-	if (!buffer)
+	buff = ft_read_buff(fd, buff);
+	if (!buff)
 		return (0);
-	line = ft_get_line(buffer);
-	buffer = ft_get_res(buffer);
+	line = ft_line(buff);
+	buff = ft_res(buff);
 	return (line);
 }

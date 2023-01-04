@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 19:55:47 by hbouqssi          #+#    #+#             */
-/*   Updated: 2022/12/30 19:11:03 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:26:24 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,13 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		nb_words;
 	char	**res;
-
+	
 	if (s == NULL)
 		return (NULL);
 	i = 0;
 	nb_words = count_words(s, c);
 	res = (char **)malloc((nb_words) * sizeof(char *) + 1);
+	// add_node(&data->node, res);
 	if (res == NULL)
 		return (NULL);
 	add_to_table(s, c, nb_words, res);

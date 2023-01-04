@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 16:14:49 by hbouqssi         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:26:31 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef	struct	s_texture
 	int			of_y;
 }	t_texture;
 
+typedef struct s_node
+{
+	void	*pointer;
+	struct s_node	*next;
+}	t_node;
+
 typedef struct s_data
 {
     void *mlx;
@@ -128,12 +134,15 @@ typedef struct s_data
     t_image img;
 	t_texture	text;
 	char	*line;
-	char	**spl;
 	char	**elements;
 	char	**map;
 	char	**f_rgb;
 	char	**c_rgb;
 	char	**path;
+	int		i;
+	int		j;
+	int		len;
+	t_node	node;
 }   t_data;
 
 //________________________
@@ -178,7 +187,8 @@ void	wall_project(t_data *data);
 void	all_draw(t_data *data);
 void	init_rays(t_data *data);
 int		get_add_image(t_data *data);
-char 	*gnl(int fd);
+void    add_node(t_node *garbage, void *pointer);
+void    free_node(t_node *garbage);
 //________________________
 
 #endif

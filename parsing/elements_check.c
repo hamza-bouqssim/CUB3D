@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/04 00:58:53 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:27:32 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	get_path(t_data *data, char **spl)
 {
 	static int	i;
 
-	if (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C"))
+	if (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C") && spl[1])
 	{
 		data->path[i] = ft_strdup(spl[1]);
 		i++;
@@ -114,11 +114,13 @@ int	check_elements(t_data *data)
 
 	i = 0;
 	str = malloc(sizeof(char *) * 7);
-	if (!data->elements || !str)
+	if (!str)
 		return (0);
+	// add_node(&data->node, str);
 	data->path = malloc(sizeof(char *) * 5);
 	if (!data->path)
 		return (0);
+	// add_node(&data->node, data->path);
 	while (data->elements[i])
 	{
 		spl = ft_split(data->elements[i], ' ');
@@ -126,12 +128,12 @@ int	check_elements(t_data *data)
 		if (!checker(data, spl) || !check_double(spl, str))
 		{
 			ft_free (spl);
-			ft_free (str);
+			// ft_free (str);
 			return (0);
 		}
 		ft_free(spl);
 		i++;
 	}
-	ft_free (str);
+	// ft_free (str);
 	return (1);
 }
