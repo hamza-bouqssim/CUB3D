@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 01:09:39 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:14:49 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	wall_project(t_data *data);
 void	all_draw(t_data *data);
 void	init_rays(t_data *data);
 int		get_add_image(t_data *data);
+char 	*gnl(int fd);
 //________________________
 
 #endif

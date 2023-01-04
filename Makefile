@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
+#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/03 23:51:58 by sismaili         ###   ########.fr        #
+#    Updated: 2023/01/04 15:53:41 by hbouqssi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = main.c \
 	parsing/elements_check.c \
 	parsing/map_check.c \
 	tools/get_next_line.c \
+	tools/gnl.c \
 	tools/get_next_line_utils.c \
 	minimap/draw_rays.c \
 	minimap/minimap_draw.c \

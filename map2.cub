@@ -1,10 +1,10 @@
-NO ./texture/zelija.xpm
-SO ./texture/zelija2.xpm
-WE ./texture/zelija3.xpm
-EA ./texture/zelija4.xpm
+NO ./texture/egy0.xpm
+SO ./texture/egy1.xpm
+WE ./texture/egy2.xpm
+EA ./texture/egy3.xpm
 
-F 154,115,82
-C 0,191,255
+F 115,46,0
+C 255,164,27
 
                          111111111
                         10000000001
@@ -39,6 +39,7 @@ C 0,191,255
 101        10000000000000001
 101       1000000000000000001
 101111111100000000000000000001
+
 100000000000000000000000000001
 111111111100000000000000000001
           1000000000000000001

@@ -1,9 +1,9 @@
-NO ./texture/zelija.xpm
-SO ./texture/zelija2.xpm
-WE ./texture/zelija3.xpm
-EA ./texture/zelija4.xpm
+NO ./texture/marble00.xpm
+SO ./texture/marble01.xpm
+WE ./texture/marble02.xpm
+EA ./texture/marble03.xpm
 
-F 154,115,82
+F 22,44,52
 C 0,191,255
 
 11111111111111111111111111111111111111111

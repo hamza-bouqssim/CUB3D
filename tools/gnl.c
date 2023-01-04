@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/25 10:12:35 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 16:41:12 by hbouqssi         ###   ########.fr       */
+/*   Created: 2023/01/04 15:47:41 by hbouqssi          #+#    #+#             */
+/*   Updated: 2023/01/04 16:40:26 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 static char	*ft_read(int fd, char *buffer)
 {
 	char	*buf;
@@ -21,7 +20,7 @@ static char	*ft_read(int fd, char *buffer)
 	if (!buf)
 		return (NULL);
 	ret = 1;
-	while (!ft_strchr(buffer, '\n') && ret != 0)
+	while (!ft_strchr(buffer, '\n') && ret)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
 		if (ret == -1)
@@ -90,7 +89,7 @@ static char	*ft_get_res(char *buffer)
 	return (res);
 }
 
-char	*get_next_line(int fd)
+char	*gnl(int fd)
 {
 	char		*line;
 	static char	*buffer;

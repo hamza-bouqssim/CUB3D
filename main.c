@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 01:17:55 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:05:05 by hbouqssi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,29 +102,29 @@ int	main(int ac, char **av)
 			return (0);
 		}
 		fill_spl(&data, fd);
-		if (!check_elements(&data) || !map_check(&data))
-		{
-			free_all(&data);
-			write(2, "Error\nNot valid", 15);
-			return (0);
-		}
-		init_data(&data);
-		if (!get_add_image(&data))
-			return (0);
-		search_player(&data);
-		all_draw(&data);
-		mlx_hook(data.win, 17, 0, close_win, &data);
-		mlx_hook(data.win, 2, 0, ft_pressed, &data);
-		mlx_hook(data.win, 3, 0, ft_released, &data);
-		mlx_hook(data.win, 6, 0, mouse_move, &data);
-		mlx_loop_hook(data.mlx, ft_keys, &data);
-		mlx_loop(data.mlx);
+	// 	if (!check_elements(&data) || !map_check(&data))
+	// 	{
+	// 		free_all(&data);
+	// 		write(2, "Error\nNot valid", 15);
+	// 		return (0);
+	// 	}
+	// 	init_data(&data);
+	// 	if (!get_add_image(&data))
+	// 		return (0);
+	// 	search_player(&data);
+	// 	all_draw(&data);
+	// 	mlx_hook(data.win, 17, 0, close_win, &data);
+	// 	mlx_hook(data.win, 2, 0, ft_pressed, &data);
+	// 	mlx_hook(data.win, 3, 0, ft_released, &data);
+	// 	mlx_hook(data.win, 6, 0, mouse_move, &data);
+	// 	mlx_loop_hook(data.mlx, ft_keys, &data);
+	// 	mlx_loop(data.mlx);
+	// }
+	// else
+	// {
+	// 	write(2, "Check your arguments !\n", 23);
+	// 	return (0);
 	}
-	else
-	{
-		write(2, "Check your arguments !\n", 23);
-		return (0);
-	}
-	free_all(&data);
+	// free_all(&data);
 	return (1);
 }
