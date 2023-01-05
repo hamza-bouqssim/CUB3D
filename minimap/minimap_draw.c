@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mm_draw.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 01:10:58 by sismaili          #+#    #+#             */
+/*   Updated: 2023/01/05 01:10:59 by sismaili         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	draw(t_data *data, int color, double x, double y)
@@ -70,48 +82,46 @@ void	circle(t_data *data, double x, double y, int r)
 	}
 }
 
+void	m_draw(t_data *data)
+{
+	while (data->map[data->mm.y] && data->mm.y < data->mm.start_y + 20)
+	{
+		data->mm.x = data->mm.start_x;
+		while (data->map[data->mm.y][data->mm.x]
+			&& data->mm.x < data->mm.start_x + 20
+			&& data->mm.x < ft_strlen(data->map[data->mm.y]))
+		{
+			data->mm.draw_x = (data->mm.x - data->mm.start_x);
+			data->mm.draw_y = (data->mm.y - data->mm.start_y);
+			if (data->map[data->mm.y][data->mm.x] == '1')
+				draw(data, 0x0000ff, data->mm.draw_x, data->mm.draw_y);
+			else if (data->map[data->mm.y][data->mm.x] == 'N'
+				|| data->map[data->mm.y][data->mm.x] == 'S'
+					|| data->map[data->mm.y][data->mm.x] == 'E'
+					|| data->map[data->mm.y][data->mm.x] == 'W')
+				data->map[data->mm.y][data->mm.x] = '0';
+			data->mm.x++;
+		}
+		data->mm.y++;
+	}
+}
+
 void	minimap_draw(t_data *data)
 {
-	int		x;
-	int		y;
-	double	start_x;
-	double	start_y;
-	double	draw_x;
-	double	draw_y;
-
-	start_x = data->player.x1 / data->scale;
-	start_y = data->player.y1 / data->scale;
-	start_x -= 10;
-	start_y -= 10;
-	if (start_x < 0)
-		start_x = 0;
-	if (start_y < 0)
-		start_y = 0;
-	y = start_y;
-	while (data->map[y] && y < start_y + 20)
-	{
-		x = start_x;
-		while (data->map[y][x] && x < start_x + 20
-			&& x < ft_strlen(data->map[y]))
-		{
-			draw_x = (x - start_x);
-			draw_y = (y - start_y);
-			if (data->map[y][x] == '1')
-				draw(data, 0x0000ff, draw_x, draw_y);
-			else if (data->map[y][x] == '0')
-				draw(data, 0xffffff, draw_x, draw_y);
-			else if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
-					|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
-			{
-				draw(data, 0xffffff, draw_x, draw_y);
-				data->map[y][x] = '0';
-			}
-			x++;
-		}
-		y++;
-	}
-	start_x = (data->player.x1 / data->scale - start_x) * data->scale;
-	start_y = (data->player.y1 / data->scale - start_y) * data->scale;
-	circle(data, start_x, start_y, data->scale / 5);
-	line(data, start_x, start_y, data->player.rot_angle);
+	data->mm.start_x = data->player.x1 / data->scale;
+	data->mm.start_y = data->player.y1 / data->scale;
+	data->mm.start_x -= 10;
+	data->mm.start_y -= 10;
+	if (data->mm.start_x < 0)
+		data->mm.start_x = 0;
+	if (data->mm.start_y < 0)
+		data->mm.start_y = 0;
+	data->mm.y = data->mm.start_y;
+	m_draw(data);
+	data->mm.start_x = (data->player.x1 / data->scale - data->mm.start_x)
+		* data->scale;
+	data->mm.start_y = (data->player.y1 / data->scale - data->mm.start_y)
+		* data->scale;
+	circle(data, data->mm.start_x, data->mm.start_y, data->scale / 5);
+	line(data, data->mm.start_x, data->mm.start_y, data->player.rot_angle);
 }

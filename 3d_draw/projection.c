@@ -44,9 +44,10 @@ static void	draw_3d(t_data *data, int x, double wall_strip, unsigned int *addr)
 	while (y < j + wall_strip)
 	{
 		distance_from_top = y + (wall_strip / 2) - (HEIGHT / 2);
-		data->text.of_y = distance_from_top * ((double)data->scale_3d / wall_strip);
-		my_mlx_pixel_put(data, x, y, addr[(unsigned int)(data->text.of_y * data->scale_3d)
-			+ (unsigned int)data->text.of_x]);
+		data->text.of_y = distance_from_top
+			* ((double)data->scale_3d / wall_strip);
+		my_mlx_pixel_put(data, x, y, addr[(unsigned int)(data->text.of_y
+				* data->scale_3d) + (unsigned int)data->text.of_x]);
 		y++;
 		if (y > HEIGHT)
 			break ;

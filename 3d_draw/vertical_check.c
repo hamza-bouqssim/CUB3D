@@ -35,17 +35,17 @@ static void	vertical_check(t_data *data, double next_x, double next_y)
 	distance_init(data, found_wall);
 }
 
-void	vertical_init(t_data *data, int column)
+void	vertical_init(t_data *data)
 {
 	double	next_x;
 	double	next_y;
 
-	(void)column;
 	data->rays.v_wall_x = 0;
 	data->rays.v_wall_y = 0;
 	next_x = 0;
 	next_y = 0;
-	data->rays.xintercept = floor(data->player.x / data->scale_3d) * data->scale_3d;
+	data->rays.xintercept = floor(data->player.x / data->scale_3d)
+		* data->scale_3d;
 	if (data->rays.is_right)
 		data->rays.xintercept += data->scale_3d;
 	data->rays.yintercept = data->player.y

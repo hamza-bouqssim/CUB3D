@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbouqssi <hbouqssi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/04 15:53:41 by hbouqssi         ###   ########.fr        #
+#    Updated: 2023/01/05 01:26:19 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = cub3D
 GCC = gcc -Wall -Wextra -Werror -Ofast
 MLX = mlx_lib/libmlx.a
 SRC = main.c \
+	ft_inits.c \
 	all_draw.c \
+	wall_check.c \
 	tools/ft_strlen.c \
 	tools/ft_split.c \
 	tools/ft_strdup.c \
@@ -27,9 +29,7 @@ SRC = main.c \
 	parsing/elements_check.c \
 	parsing/map_check.c \
 	tools/get_next_line.c \
-	tools/gnl.c \
 	tools/get_next_line_utils.c \
-	minimap/draw_rays.c \
 	minimap/minimap_draw.c \
 	movements/key_hooks.c \
 	movements/moves.c \

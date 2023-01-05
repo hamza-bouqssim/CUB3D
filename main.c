@@ -6,47 +6,11 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/04 23:27:44 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:58:08 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_data(t_data *data)
-{
-	data->columns = ft_count_columns(data->map);
-	data->rows = ft_count_rows(data->map);
-	data->scale = 12;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "CUB3D");
-	data->w_pressed = 0;
-	data->a_pressed = 0;
-	data->s_pressed = 0;
-	data->d_pressed = 0;
-	data->ri_pressed = 0;
-	data->le_pressed = 0;
-}
-
-void	init_player_data(t_data *data, int x, int y)
-{
-	data->scale_3d = data->text.no_hei;
-	data->width = data->columns * data->scale_3d;
-	data->height = data->rows * data->scale_3d;
-	data->player.x = x * data->scale_3d + (data->scale_3d / 2);
-	data->player.y = y * data->scale_3d + (data->scale_3d / 2);
-	data->player.x1 = x * data->scale + (data->scale / 2);
-	data->player.y1 = y * data->scale + (data->scale / 2);
-	data->player.rot_speed = 1.5 * (M_PI / 180);
-	data->player.move_speed = 50;
-	if (data->map[y][x] == 'N')
-		data->player.rot_angle = 3 * M_PI / 2;
-	else if (data->map[y][x] == 'S')
-		data->player.rot_angle = M_PI / 2;
-	else if (data->map[y][x] == 'E')
-		data->player.rot_angle = 0;
-	else if (data->map[y][x] == 'W')
-		data->player.rot_angle = M_PI;
-}
 
 void	search_player(t_data *data)
 {
@@ -88,39 +52,51 @@ int	mouse_move(int x, int y, void *param)
 	return (0);
 }
 
+int	ft_parsing(t_data *data, char *av)
+{
+	int	fd;
+
+	ft_init(data);
+	fd = open(av, O_RDONLY);
+	if (fd < 0 || valide_path(av, ".cub") == 0)
+	{
+		write(2, "Wrong path\n", 11);
+		return (0);
+	}
+	fill_spl(data, fd);
+	if (!check_elements(data) || !map_check(data))
+	{
+		free_all(data);
+		write(2, "Error\nNot valid", 15);
+		return (0);
+	}
+	return (1);
+}
+
+void	mlx_hooks(t_data *data)
+{
+	mlx_hook(data->win, 17, 0, close_win, data);
+	mlx_hook(data->win, 2, 0, ft_pressed, data);
+	mlx_hook(data->win, 3, 0, ft_released, data);
+	mlx_hook(data->win, 6, 0, mouse_move, data);
+	mlx_loop_hook(data->mlx, ft_keys, data);
+	mlx_loop(data->mlx);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
-	int		fd;
 
 	if (ac == 2)
 	{
-		fd = open(av[1], O_RDONLY);
-		if (fd < 0 || valide_path(av[1], ".cub") == 0)
-		{
-			write(2, "Wrong path\n", 11);
+		if (!ft_parsing(&data, av[1]))
 			return (0);
-		}
-		fill_spl(&data, fd);
-		if (!check_elements(&data) || !map_check(&data))
-		{
-			free_all(&data);
-			// free_node(&data.node);
-			write(2, "Error\nNot valid", 15);
-			while (1);
-			return (0);
-		}
 		init_data(&data);
 		if (!get_add_image(&data))
 			return (0);
 		search_player(&data);
 		all_draw(&data);
-		mlx_hook(data.win, 17, 0, close_win, &data);
-		mlx_hook(data.win, 2, 0, ft_pressed, &data);
-		mlx_hook(data.win, 3, 0, ft_released, &data);
-		mlx_hook(data.win, 6, 0, mouse_move, &data);
-		mlx_loop_hook(data.mlx, ft_keys, &data);
-		mlx_loop(data.mlx);
+		mlx_hooks(&data);
 	}
 	else
 	{
@@ -128,6 +104,5 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	free_all(&data);
-	free_node(&data.node);
 	return (1);
 }

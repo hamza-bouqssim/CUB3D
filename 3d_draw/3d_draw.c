@@ -1,5 +1,10 @@
 #include "../cub3d.h"
 
+double	distance_points(double x1, double y1, double x2, double y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
 static void	get_distance(t_data *data, int i)
 {
 	if (data->rays.h_distance < data->rays.v_distance)
@@ -46,8 +51,8 @@ void	wall_project(t_data *data)
 		data->rays.ray_angle = fmod(data->rays.ray_angle, 2 * M_PI);
 		if (data->rays.ray_angle < 0)
 			data->rays.ray_angle = (2 * M_PI) + data->rays.ray_angle;
-		horizontal_init(data, i);
-		vertical_init(data, i);
+		horizontal_init(data);
+		vertical_init(data);
 		get_distance(data, i);
 		data->rays.ray_angle += data->rays.view_angle / data->rays.num_rays;
 		i++;

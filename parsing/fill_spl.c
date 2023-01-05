@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:12:39 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/04 22:06:07 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/05 02:01:57 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	store_map(t_data *data, char *str)
 {
-	data->i = 0;
-	data->j = 0;
-	data->len = 0;
 	while (str[data->i])
 	{
 		if (str[data->i] == '\n')
 		{
 			data->map[data->j] = malloc(sizeof(char) * data->len + 1);
+			if (!data->map)
+				return ;
 			data->i -= data->len;
 			data->len = 0;
 			while (str[data->i] != '\n')
@@ -84,6 +83,9 @@ void	fill_spl(t_data *data, int fd)
 	data->map = malloc(sizeof(char *) * len + 1);
 	if (!data->map)
 		return ;
+	data->i = 0;
+	data->j = 0;
+	data->len = 0;
 	store_map(data, str);
 	free(str);
 }

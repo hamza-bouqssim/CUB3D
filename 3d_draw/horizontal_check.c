@@ -33,15 +33,15 @@ static void	horizontal_check(t_data *data, double next_x, double next_y)
 	distance_init(data, found_wall);
 }
 
-void	horizontal_init(t_data *data, int column)
+void	horizontal_init(t_data *data)
 {
 	double	next_x;
 	double	next_y;
 
-	(void)column;
 	data->rays.h_wall_x = 0;
 	data->rays.h_wall_y = 0;
-	data->rays.yintercept = floor(data->player.y / data->scale_3d) * data->scale_3d;
+	data->rays.yintercept = floor(data->player.y / data->scale_3d)
+		* data->scale_3d;
 	if (data->rays.is_down)
 		data->rays.yintercept += data->scale_3d;
 	data->rays.xintercept = data->player.x
