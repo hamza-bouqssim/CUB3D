@@ -6,7 +6,7 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/05 14:03:39 by sismaili         ###   ########.fr        #
+#    Updated: 2023/01/06 15:30:31 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = main.c \
 	tools/ft_free.c \
 	tools/ft_atoi.c \
 	tools/is_digit.c \
+	tools/ft_calloc.c \
 	parsing/valid_path.c \
 	parsing/fill_spl.c \
 	parsing/elements_check.c \

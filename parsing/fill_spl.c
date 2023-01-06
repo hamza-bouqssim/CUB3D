@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:12:39 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/06 02:25:33 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:40:49 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,23 @@ int	is_last_line(t_data *data, char *str, int len)
 	i = 0;
 	l = 0;
 	data->j = 0;
-	while (str[i] && len > 0)
-		i++;
-	while (i > 0)
+	if (len > 0)
 	{
-		if (str[i] >= 33 && str[i] <= 126)
-			break ;
-		i--;
+		while (str[i])
+			i++;
+		while (i > 0)
+		{
+			if (str[i] >= 33 && str[i] <= 126)
+				break ;
+			i--;
+		}
+		count_lines(data, str, i);
+		if (len >= data->j)
+			return (free(str), 0);
+		data->map = malloc(sizeof(char *) * data->j + 1);
+		if (!data->map)
+			return (0);
 	}
-	count_lines(data, str, i);
-	if (len >= data->j && len > 0)
-		return (free(str), 0);
-	data->map = malloc(sizeof(char *) * data->j + 1);
-	if (!data->map)
-		return (0);
 	return (i);
 }
 
@@ -59,7 +62,7 @@ void	store_map(t_data *data, char *str, int check)
 	{
 		if (str[data->i] == '\n' || data->i == check)
 		{
-			data->map[data->j] = malloc(sizeof(char) * data->len + 1);
+			data->map[data->j] = ft_calloc(data->len + 2, sizeof(char));
 			if (!data->map)
 				return ;
 			data->i -= data->len;
@@ -70,7 +73,6 @@ void	store_map(t_data *data, char *str, int check)
 				data->i++;
 				data->len++;
 			}
-			data->map[data->j][data->len] = '\0';
 			data->j++;
 			data->len = -1;
 		}

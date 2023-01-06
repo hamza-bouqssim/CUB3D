@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/06 01:06:52 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:29:00 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strchr(char *s, int c);
 char				*ft_strdup(char *s1);
 char				**ft_split(char const *s, char c);
+void				*ft_calloc(size_t count, size_t size);
 int					ft_count_rows(char **str);
 int					ft_count_columns(char **str);
 int					fill_spl(t_data *data, int fd);
