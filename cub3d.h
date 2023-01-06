@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:19 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/05 01:26:27 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/06 01:06:52 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ char				*ft_strdup(char *s1);
 char				**ft_split(char const *s, char c);
 int					ft_count_rows(char **str);
 int					ft_count_columns(char **str);
-void				fill_spl(t_data *data, int fd);
+int					fill_spl(t_data *data, int fd);
 int					ft_isspace(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_free(char **spl);
@@ -182,6 +182,7 @@ void				s_move(t_data *data);
 void				d_move(t_data *data);
 void				a_move(t_data *data);
 int					wall_check(t_data *data, double y, double x);
+int					wall_check2(t_data *data, double y, double x);
 void				horizontal_init(t_data *data);
 void				vertical_init(t_data *data);
 double				distance_points(double x1, double y1, double x2, double y2);

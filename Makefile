@@ -6,12 +6,12 @@
 #    By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 15:23:24 by hbouqssi          #+#    #+#              #
-#    Updated: 2023/01/05 01:26:19 by sismaili         ###   ########.fr        #
+#    Updated: 2023/01/05 14:03:39 by sismaili         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-GCC = gcc -Wall -Wextra -Werror -Ofast
+GCC = cc -Wall -Wextra -Werror
 MLX = mlx_lib/libmlx.a
 SRC = main.c \
 	ft_inits.c \
@@ -45,7 +45,7 @@ OBJ = ${SRC:.c=.o}
 all: $(NAME)
 
 %.o: %.c cub3d.h
-	$(GCC) -c $< -o $@ -g
+	$(GCC) -c $< -o $@
 
 $(NAME): $(OBJ) 
 	$(GCC) $(OBJ) $(MLX) -g -lmlx -framework OpenGL -framework AppKit -o  $(NAME)

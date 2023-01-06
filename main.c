@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:23:22 by hbouqssi          #+#    #+#             */
-/*   Updated: 2023/01/05 01:58:08 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/06 01:07:33 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	ft_parsing(t_data *data, char *av)
 		write(2, "Wrong path\n", 11);
 		return (0);
 	}
-	fill_spl(data, fd);
-	if (!check_elements(data) || !map_check(data))
+	if (!fill_spl(data, fd) || !check_elements(data) || !map_check(data))
 	{
 		free_all(data);
 		write(2, "Error\nNot valid", 15);
