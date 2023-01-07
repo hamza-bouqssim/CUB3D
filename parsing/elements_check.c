@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:39:56 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/06 01:29:39 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/01/07 16:58:56 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,27 @@
 static void	get_path(t_data *data, char **spl)
 {
 	static int	i;
+	static int	j;
 
 	if (i == 0)
 	{
-		data->path = malloc(sizeof(char *) * 5);
+		data->path = ft_calloc(5, sizeof(char *));
 		if (!data->path)
 			return ;
-		data->path[0] = NULL;
 	}
 	if (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C") && spl[1])
 	{
-		data->path[i] = ft_strdup(spl[1]);
-		i++;
-		if (i == 4)
-			data->path[i] = 0;
-		data->path[i] = NULL;
+		if (!ft_strcmp(spl[0], "NO"))
+			data->path[0] = ft_strdup(spl[1]);
+		else if (!ft_strcmp(spl[0], "SO"))
+			data->path[1] = ft_strdup(spl[1]);
+		else if (!ft_strcmp(spl[0], "WE"))
+			data->path[2] = ft_strdup(spl[1]);
+		else if (!ft_strcmp(spl[0], "EA"))
+			data->path[3] = ft_strdup(spl[1]);
+		j++;
 	}
+	i++;
 }
 
 static int	check_double(char **spl, char **str)
