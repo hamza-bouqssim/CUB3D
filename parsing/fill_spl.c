@@ -6,7 +6,7 @@
 /*   By: sismaili <sismaili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 16:12:39 by sismaili          #+#    #+#             */
-/*   Updated: 2023/01/06 15:40:49 by sismaili         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:00:41 by sismaili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	fill_spl(t_data *data, int fd)
 	int			check;
 	static char	*str;
 
-	data->elements = malloc(sizeof(char *) * 7);
+	data->elements = ft_calloc(7, sizeof(char *));
 	if (!data->elements)
 		return (0);
 	data->line = get_next_line(fd);
